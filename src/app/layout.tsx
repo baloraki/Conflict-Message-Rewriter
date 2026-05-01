@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MobileNav from "@/components/layout/MobileNav";
+import { Analytics } from "@vercel/analytics/next";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://burnafterchat.app";
 
@@ -69,6 +70,7 @@ export default function RootLayout({
         <main className="pb-16 sm:pb-0">{children}</main>
         <Footer />
         <MobileNav />
+        <Analytics />
       </body>
     </html>
   );
