@@ -48,15 +48,18 @@ describe("calmReplyGenerator", () => {
     expect(result).toEqual([]);
   });
 
-  it("chat messages should not be stored in localStorage", () => {
-    // Verify localStorage is not used for messages — this is a policy check
-    // The actual message storage is React state only (see FakeChat.tsx comments)
+  it("chat messages should not be stored in localStorage (policy check)", () => {
+    // Privacy policy: chat messages must never be written to localStorage.
+    // This test verifies the policy by ensuring nothing writes message data
+    // when using the calm/fake reply generators (which are the non-UI lib functions).
+    // The FakeChat component itself uses only React state (documented in FakeChat.tsx).
     const setItemSpy = vi.spyOn(Storage.prototype, "setItem");
-    // Simulate what the app does: no message data written to localStorage
-    expect(setItemSpy).not.toHaveBeenCalledWith(
-      expect.stringContaining("message"),
-      expect.anything()
-    );
+    
+    // Calling generators should never touch localStorage
+    getCalmTemplates("say-no");
+    getAllSituations();
+    
+    expect(setItemSpy).not.toHaveBeenCalled();
     setItemSpy.mockRestore();
   });
 });
