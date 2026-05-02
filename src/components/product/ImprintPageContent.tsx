@@ -8,11 +8,13 @@ export default function ImprintPageContent() {
         Legal disclosure pursuant to § 5 TMG (German Telemedia Act)
       </p>
 
+      {/* TODO: Replace all placeholder values below before deploying to production */}
       <div className="space-y-8 text-zinc-300 leading-relaxed">
         <section>
           <h2 className="text-xl font-semibold text-zinc-100 mb-3">
             Responsible operator
           </h2>
+          {/* TODO: Replace with actual name and address */}
           <address className="not-italic text-zinc-300 space-y-1">
             <p>[VORNAME NACHNAME]</p>
             <p>[STRASSE HAUSNR]</p>
@@ -23,6 +25,7 @@ export default function ImprintPageContent() {
 
         <section>
           <h2 className="text-xl font-semibold text-zinc-100 mb-3">Contact</h2>
+          {/* TODO: Replace with actual contact email */}
           <p>
             Email:{" "}
             <a
@@ -42,6 +45,7 @@ export default function ImprintPageContent() {
             Responsible for the content of this website pursuant to § 55
             para.&nbsp;2 RStV:
           </p>
+          {/* TODO: Replace with actual name and address */}
           <address className="not-italic mt-2 text-zinc-300 space-y-1">
             <p>[VORNAME NACHNAME]</p>
             <p>[STRASSE HAUSNR]</p>
