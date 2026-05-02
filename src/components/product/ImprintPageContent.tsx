@@ -1,5 +1,7 @@
 "use client";
 
+import { ObfuscatedEmail } from "@/components/ui/ObfuscatedEmail";
+
 export default function ImprintPageContent() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-10">
@@ -25,15 +27,15 @@ export default function ImprintPageContent() {
 
         <section>
           <h2 className="text-xl font-semibold text-zinc-100 mb-3">Contact</h2>
-          {/* TODO: Replace with actual contact email */}
+          {/* TODO: Replace the encoded value with:
+               node -e "console.log(Buffer.from('you@example.com').toString('base64'))"
+          */}
           <p>
             Email:{" "}
-            <a
-              href="mailto:[DEINE@EMAIL.DE]"
+            <ObfuscatedEmail
+              encoded="W0RFSU5FQEVNQUJMLURF"
               className="text-orange-400 hover:underline"
-            >
-              [DEINE@EMAIL.DE]
-            </a>
+            />
           </p>
         </section>
 
