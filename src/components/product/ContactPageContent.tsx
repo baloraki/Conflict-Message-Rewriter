@@ -1,12 +1,8 @@
-import type { Metadata } from "next";
+"use client";
+
 import ContactForm from "@/components/product/ContactForm";
 
-export const metadata: Metadata = {
-  title: "Contact – Burn After Chat",
-  description: "Get in touch with the Burn After Chat team.",
-};
-
-export default function ContactPage() {
+export default function ContactPageContent() {
   return (
     <div className="max-w-xl mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold text-zinc-100 mb-2">Contact</h1>

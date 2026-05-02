@@ -1,15 +1,10 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 
-export const metadata: Metadata = {
-  title: "About – Burn After Chat",
-  description:
-    "Why Burn After Chat exists, why it is fake by design, and why deletion is the core feature.",
-};
-
-export default function AboutPage() {
+export default function AboutPageContent() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold text-zinc-100 mb-2">About</h1>
