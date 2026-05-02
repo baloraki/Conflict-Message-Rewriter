@@ -136,7 +136,7 @@ export default function FakeChat() {
   }
 
   return (
-    <div className="flex flex-col h-[100dvh] bg-zinc-950 max-w-lg mx-auto">
+    <div className="fixed inset-0 flex flex-col bg-zinc-950 max-w-lg mx-auto">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 bg-zinc-950/95 backdrop-blur-sm">
         <div className="flex items-center gap-3">
