@@ -1,10 +1,9 @@
 "use client";
 
-// PRIVACY NOTE: Chat messages are intentionally stored only in React component state.
-// They are never written to localStorage, sessionStorage, IndexedDB, cookies,
-// URL parameters, or any backend service. When this component unmounts, the page
-// reloads, or the user deletes the chat, all messages are permanently gone.
-// This is a deliberate privacy-first design decision.
+// PRIVACY NOTE: Chat messages are stored only in the browser's localStorage so
+// the conversation survives page reloads. They are never sent to any server,
+// backend service, or third party. When the user burns / deletes the chat the
+// localStorage entry is cleared and all messages are permanently gone.
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -26,9 +25,27 @@ import { generateId } from "@/lib/utils";
 
 type ChatState = "chat" | "burning" | "after";
 
+const STORAGE_KEY = "chat_messages";
+
+function loadMessages(): ChatMessage[] {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw) as Array<
+      Omit<ChatMessage, "timestamp"> & { timestamp: string }
+    >;
+    return parsed.map((m) => ({ ...m, timestamp: new Date(m.timestamp) }));
+  } catch {
+    return [];
+  }
+}
+
 export default function FakeChat() {
   const router = useRouter();
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [messages, setMessages] = useState<ChatMessage[]>(() => {
+    if (typeof window === "undefined") return [];
+    return loadMessages();
+  });
   const [isTyping, setIsTyping] = useState(false);
   const [chatState, setChatState] = useState<ChatState>("chat");
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
@@ -39,6 +56,14 @@ export default function FakeChat() {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+    } catch {
+      // localStorage may be unavailable or full; silently ignore
+    }
+  }, [messages]);
 
   useEffect(() => {
     return () => {
@@ -82,7 +107,8 @@ export default function FakeChat() {
   }, []);
 
   const handleBurnComplete = useCallback(() => {
-    // Clear all messages from React state — they are permanently gone
+    // Clear all messages from React state and localStorage — they are permanently gone
+    localStorage.removeItem(STORAGE_KEY);
     setMessages([]);
     if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
     setIsTyping(false);
