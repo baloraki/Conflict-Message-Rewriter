@@ -4,9 +4,17 @@ import CalmReplyComposer from "@/components/product/CalmReplyComposer";
 import DisclaimerBox from "@/components/product/DisclaimerBox";
 
 export const metadata: Metadata = {
-  title: "Calm Reply Composer – Burn After Chat",
+  title: "Calm Reply Composer — Write a calmer version",
   description:
-    "Write a calmer version. Choose a situation and copy a calm message template.",
+    "Pick a situation. Get a calm, clear message template you can copy. Say no, set a boundary, ask for space, or apologise — without AI.",
+  alternates: { canonical: "/calm-reply" },
+  openGraph: {
+    title: "Calm Reply Composer — Write a calmer version",
+    description:
+      "Pre-written calm templates for hard messages. No AI. No backend. Just practical phrasing.",
+    url: "/calm-reply",
+    type: "website",
+  },
 };
 
 export default function CalmReplyPage() {

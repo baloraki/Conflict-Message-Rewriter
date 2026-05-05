@@ -126,8 +126,10 @@ export default function FakeChat() {
 
   if (chatState === "after") {
     return (
-      <div className="fixed inset-0 bg-zinc-950 flex flex-col items-center justify-center p-6 text-center">
-        <div className="text-6xl mb-6">✦</div>
+      <div className="fixed inset-0 bg-zinc-950 flex flex-col items-center justify-center px-6 pt-safe pb-safe text-center">
+        <div className="text-6xl mb-6" aria-hidden="true">
+          ✦
+        </div>
         <h1 className="text-4xl font-bold text-zinc-100 mb-3">Gone.</h1>
         <p className="text-zinc-400 text-lg mb-2">
           You wrote it here. You didn&apos;t send it.
@@ -164,13 +166,34 @@ export default function FakeChat() {
   return (
     <div className="fixed inset-0 flex flex-col bg-zinc-950 max-w-lg mx-auto">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 bg-zinc-950/95 backdrop-blur-sm">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-600 flex items-center justify-center text-sm font-bold text-zinc-200">
+      <div className="flex items-center justify-between gap-2 px-3 sm:px-4 pt-safe py-3 border-b border-zinc-800 bg-zinc-950/95 backdrop-blur-sm">
+        <button
+          onClick={() => router.push("/")}
+          aria-label="Back to home"
+          className="flex items-center justify-center -ml-1 w-10 h-10 rounded-full text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900 transition-colors flex-shrink-0"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-5 h-5"
+            aria-hidden="true"
+          >
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <div className="flex items-center gap-3 min-w-0 flex-1">
+          <div
+            className="w-9 h-9 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-600 flex items-center justify-center text-sm font-bold text-zinc-200 flex-shrink-0"
+            aria-hidden="true"
+          >
             V
           </div>
-          <div>
-            <p className="font-semibold text-zinc-100 text-sm">Void</p>
+          <div className="min-w-0">
+            <p className="font-semibold text-zinc-100 text-sm truncate">Void</p>
             <p className="text-xs text-green-400">● Private</p>
           </div>
         </div>
@@ -179,8 +202,10 @@ export default function FakeChat() {
           size="sm"
           onClick={() => setShowDeleteDialog(true)}
           disabled={messages.length === 0}
+          aria-label="Delete chat"
+          className="flex-shrink-0"
         >
-          🔥 Delete chat
+          🔥 Delete
         </Button>
       </div>
 
@@ -196,10 +221,17 @@ export default function FakeChat() {
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-3 py-4 space-y-1">
+      <div
+        className="flex-1 overflow-y-auto overscroll-contain px-3 py-4 space-y-1"
+        role="log"
+        aria-live="polite"
+        aria-label="Chat messages"
+      >
         {messages.length === 0 && (
           <div className="flex flex-col items-center justify-center h-full text-center py-12">
-            <div className="text-4xl mb-4">🕳️</div>
+            <div className="text-4xl mb-4" aria-hidden="true">
+              🕳️
+            </div>
             <p className="text-zinc-500 text-sm max-w-xs leading-relaxed">
               Write anything here. The Void is listening. Nothing leaves this
               screen.
