@@ -1,6 +1,10 @@
-export default function TypingIndicator() {
+interface TypingIndicatorProps {
+  label?: string;
+}
+
+export default function TypingIndicator({ label = "Void is typing" }: TypingIndicatorProps) {
   return (
-    <div className="flex items-center gap-2 px-2 mb-2">
+    <div className="flex items-center gap-2 px-2 mb-2" aria-label={label}>
       <div className="w-8 h-8 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-600 flex items-center justify-center text-xs text-zinc-300 font-bold flex-shrink-0">
         V
       </div>

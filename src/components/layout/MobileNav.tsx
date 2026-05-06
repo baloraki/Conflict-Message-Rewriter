@@ -3,17 +3,35 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { isLocale, DEFAULT_LOCALE } from "@/i18n/config";
 
-const NAV_ITEMS = [
-  { href: "/", label: "Home", icon: "🏠" },
-  { href: "/chat", label: "Chat", icon: "🔥" },
-  { href: "/calm-reply", label: "Calm", icon: "✉️" },
-  { href: "/about", label: "About", icon: "ℹ️" },
-];
+interface MobileNavProps {
+  translations: {
+    home: string;
+    chat: string;
+    calm: string;
+    about: string;
+  };
+}
 
-export default function MobileNav() {
+export default function MobileNav({ translations }: MobileNavProps) {
   const pathname = usePathname();
-  if (pathname === "/chat") return null;
+
+  const segments = pathname.split("/");
+  const localeFromPath = segments[1];
+  const currentLocale = isLocale(localeFromPath) ? localeFromPath : DEFAULT_LOCALE;
+  const pathWithoutLocale = isLocale(localeFromPath)
+    ? "/" + segments.slice(2).join("/")
+    : pathname;
+
+  if (pathWithoutLocale === "/chat") return null;
+
+  const navItems = [
+    { href: `/${currentLocale}`, pathMatch: "/", label: translations.home, icon: "🏠" },
+    { href: `/${currentLocale}/chat`, pathMatch: "/chat", label: translations.chat, icon: "🔥" },
+    { href: `/${currentLocale}/calm-reply`, pathMatch: "/calm-reply", label: translations.calm, icon: "✉️" },
+    { href: `/${currentLocale}/about`, pathMatch: "/about", label: translations.about, icon: "ℹ️" },
+  ];
 
   return (
     <nav
@@ -21,8 +39,11 @@ export default function MobileNav() {
       aria-label="Primary"
     >
       <div className="flex items-stretch justify-around pt-1.5">
-        {NAV_ITEMS.map(({ href, label, icon }) => {
-          const active = pathname === href;
+        {navItems.map(({ href, pathMatch, label, icon }) => {
+          const active =
+            pathMatch === "/"
+              ? pathWithoutLocale === "/" || pathWithoutLocale === ""
+              : pathWithoutLocale === pathMatch;
           return (
             <Link
               key={href}

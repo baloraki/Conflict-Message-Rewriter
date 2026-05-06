@@ -23,7 +23,28 @@ function FieldError({ msg }: { msg?: string }) {
   return <p className="mt-1 text-xs text-red-400">{msg}</p>;
 }
 
-export default function ContactForm() {
+const DEFAULT_TRANSLATIONS = {
+  name: "Name",
+  namePlaceholder: "Your name",
+  email: "Email",
+  emailPlaceholder: "your@email.com",
+  subject: "Subject",
+  subjectPlaceholder: "What's this about?",
+  message: "Message",
+  messagePlaceholder: "Your message…",
+  submit: "Send message",
+  sending: "Sending…",
+  success: "Message sent. We'll get back to you soon.",
+  error: "Something went wrong. Please try again.",
+  notConfigured: "Contact form is not configured yet.",
+};
+
+interface ContactFormProps {
+  translations?: typeof DEFAULT_TRANSLATIONS;
+  locale?: string;
+}
+
+export default function ContactForm({ translations = DEFAULT_TRANSLATIONS, locale = "en" }: ContactFormProps) {
   const [fields, setFields] = useState<ContactFormFields>(EMPTY);
   const [errors, setErrors] = useState<ContactFormErrors>({});
   const [touched, setTouched] = useState<TouchedFields>({});
@@ -75,16 +96,15 @@ export default function ContactForm() {
   if (!accessKey) {
     return (
       <div className="p-5 rounded-xl border border-zinc-700 bg-zinc-900 text-zinc-400 text-sm">
-        Contact form is not configured yet.
+        {translations.notConfigured}
       </div>
     );
   }
 
   if (status === "sent") {
     return (
-      <div className="p-5 rounded-xl border border-green-800 bg-green-950/40 text-green-300 space-y-1">
-        <p className="font-semibold">Message sent ✓</p>
-        <p className="text-sm text-green-400">We&apos;ll get back to you soon.</p>
+      <div className="p-5 rounded-xl border border-green-800 bg-green-950/40 text-green-300">
+        {translations.success}
       </div>
     );
   }
@@ -96,7 +116,7 @@ export default function ContactForm() {
 
       <div>
         <label htmlFor="name" className="block text-sm text-zinc-400 mb-1">
-          Name
+          {translations.name}
         </label>
         <input
           id="name"
@@ -107,14 +127,14 @@ export default function ContactForm() {
           onChange={handleChange}
           onBlur={handleBlur}
           className={`${INPUT_CLASS} ${errors.name && touched.name ? "border-red-500" : "border-zinc-700"}`}
-          placeholder="Your name"
+          placeholder={translations.namePlaceholder}
         />
         <FieldError msg={touched.name ? errors.name : undefined} />
       </div>
 
       <div>
         <label htmlFor="email" className="block text-sm text-zinc-400 mb-1">
-          Email
+          {translations.email}
         </label>
         <input
           id="email"
@@ -125,14 +145,14 @@ export default function ContactForm() {
           onChange={handleChange}
           onBlur={handleBlur}
           className={`${INPUT_CLASS} ${errors.email && touched.email ? "border-red-500" : "border-zinc-700"}`}
-          placeholder="your@email.com"
+          placeholder={translations.emailPlaceholder}
         />
         <FieldError msg={touched.email ? errors.email : undefined} />
       </div>
 
       <div>
         <label htmlFor="subject" className="block text-sm text-zinc-400 mb-1">
-          Subject
+          {translations.subject}
         </label>
         <input
           id="subject"
@@ -142,14 +162,14 @@ export default function ContactForm() {
           onChange={handleChange}
           onBlur={handleBlur}
           className={`${INPUT_CLASS} ${errors.subject && touched.subject ? "border-red-500" : "border-zinc-700"}`}
-          placeholder="What's this about?"
+          placeholder={translations.subjectPlaceholder}
         />
         <FieldError msg={touched.subject ? errors.subject : undefined} />
       </div>
 
       <div>
         <label htmlFor="message" className="block text-sm text-zinc-400 mb-1">
-          Message
+          {translations.message}
         </label>
         <Textarea
           id="message"
@@ -159,15 +179,13 @@ export default function ContactForm() {
           onChange={handleChange}
           onBlur={handleBlur}
           className={errors.message && touched.message ? "border-red-500" : undefined}
-          placeholder="Your message…"
+          placeholder={translations.messagePlaceholder}
         />
         <FieldError msg={touched.message ? errors.message : undefined} />
       </div>
 
       {status === "error" && (
-        <p className="text-red-400 text-sm">
-          Something went wrong. Please try again.
-        </p>
+        <p className="text-red-400 text-sm">{translations.error}</p>
       )}
 
       <Button
@@ -176,7 +194,7 @@ export default function ContactForm() {
         className="w-full"
         size="lg"
       >
-        {status === "sending" ? "Sending…" : "Send message"}
+        {status === "sending" ? translations.sending : translations.submit}
       </Button>
 
       <p className="text-xs text-zinc-500 text-center leading-relaxed">
@@ -190,7 +208,7 @@ export default function ContactForm() {
           Web3Forms
         </a>
         . See our{" "}
-        <Link href="/privacy" className="underline hover:text-zinc-300 transition-colors">
+        <Link href={`/${locale}/privacy`} className="underline hover:text-zinc-300 transition-colors">
           Privacy Policy
         </Link>{" "}
         for details on how your data is handled.

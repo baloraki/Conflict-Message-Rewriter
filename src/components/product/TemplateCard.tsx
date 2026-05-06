@@ -8,9 +8,16 @@ import { cn } from "@/lib/utils";
 interface TemplateCardProps {
   text: string;
   className?: string;
+  copyLabel?: string;
+  copiedLabel?: string;
 }
 
-export default function TemplateCard({ text, className }: TemplateCardProps) {
+export default function TemplateCard({
+  text,
+  className,
+  copyLabel = "Copy",
+  copiedLabel = "✓ Copied",
+}: TemplateCardProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -45,7 +52,7 @@ export default function TemplateCard({ text, className }: TemplateCardProps) {
           copied ? "text-green-400" : "text-zinc-500 hover:text-zinc-300"
         )}
       >
-        {copied ? "✓ Copied" : "Copy"}
+        {copied ? copiedLabel : copyLabel}
       </Button>
     </Card>
   );

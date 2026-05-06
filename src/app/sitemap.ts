@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { LOCALES } from "@/i18n/config";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://burnafterchat.app";
@@ -11,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
     priority: number;
   }> = [
-    { path: "/", changeFrequency: "weekly", priority: 1 },
+    { path: "", changeFrequency: "weekly", priority: 1 },
     { path: "/calm-reply", changeFrequency: "monthly", priority: 0.9 },
     { path: "/about", changeFrequency: "monthly", priority: 0.7 },
     { path: "/disclaimer", changeFrequency: "yearly", priority: 0.5 },
@@ -20,10 +21,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/contact", changeFrequency: "yearly", priority: 0.3 },
   ];
 
-  return routes.map((route) => ({
-    url: `${SITE_URL}${route.path}`,
-    lastModified,
-    changeFrequency: route.changeFrequency,
-    priority: route.priority,
-  }));
+  const sitemapEntries: MetadataRoute.Sitemap = [];
+
+  // Generate entries for all locales and routes
+  for (const locale of LOCALES) {
+    for (const route of routes) {
+      sitemapEntries.push({
+        url: `${SITE_URL}/${locale}${route.path}`,
+        lastModified,
+        changeFrequency: route.changeFrequency,
+        priority: route.priority,
+      });
+    }
+  }
+
+  return sitemapEntries;
 }

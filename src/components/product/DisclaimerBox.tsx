@@ -1,14 +1,24 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import type { Locale } from "@/i18n/config";
 
 interface DisclaimerBoxProps {
   className?: string;
   compact?: boolean;
+  locale: Locale;
+  translations: {
+    full: string;
+    fullLink: string;
+    compact: string;
+    compactLink: string;
+  };
 }
 
 export default function DisclaimerBox({
   className,
   compact = false,
+  locale,
+  translations,
 }: DisclaimerBoxProps) {
   return (
     <div
@@ -20,19 +30,16 @@ export default function DisclaimerBox({
     >
       {compact ? (
         <p>
-          Not therapy or crisis support.{" "}
-          <Link href="/disclaimer" className="text-orange-400 hover:underline">
-            If you feel unsafe, get help now.
+          {translations.compact}{" "}
+          <Link href={`/${locale}/disclaimer`} className="text-orange-400 hover:underline">
+            {translations.compactLink}
           </Link>
         </p>
       ) : (
         <p className="leading-relaxed">
-          This app is not therapy, crisis support, legal advice, or professional
-          mediation. If you feel unsafe, threatened, at risk of harming yourself
-          or someone else, or trapped in abuse, contact local emergency services
-          or a trusted professional.{" "}
-          <Link href="/disclaimer" className="text-orange-400 hover:underline">
-            Read full disclaimer.
+          {translations.full}{" "}
+          <Link href={`/${locale}/disclaimer`} className="text-orange-400 hover:underline">
+            {translations.fullLink}
           </Link>
         </p>
       )}

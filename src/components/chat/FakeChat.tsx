@@ -1,10 +1,5 @@
 "use client";
 
-// PRIVACY NOTE: Chat messages are stored only in the browser's localStorage so
-// the conversation survives page reloads. They are never sent to any server,
-// backend service, or third party. When the user burns / deletes the chat the
-// localStorage entry is cleared and all messages are permanently gone.
-
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import ChatBubble from "./ChatBubble";
@@ -16,13 +11,11 @@ import SafetyBanner from "./SafetyBanner";
 import PrivacyPill from "@/components/product/PrivacyPill";
 import Button from "@/components/ui/Button";
 import { ChatMessage } from "@/lib/chat/types";
-import {
-  getRandomFakeReply,
-  getFakeReplyDelay,
-} from "@/lib/chat/fakeReplyGenerator";
-import { containsSafetyKeyword } from "@/lib/chat/safetyKeywords";
+import { getFakeReplyDelay } from "@/lib/chat/fakeReplyGenerator";
 import { generateGenAiReply } from "@/lib/chat/genaiReplyGenerator";
 import { generateId } from "@/lib/utils";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/types";
 
 type ChatState = "chat" | "burning" | "after";
 
@@ -41,7 +34,19 @@ function loadMessages(): ChatMessage[] {
   }
 }
 
-export default function FakeChat() {
+interface FakeChatProps {
+  locale: Locale;
+  translations: Dictionary["chat"];
+  fakeReplies: string[];
+  safetyKeywords: string[];
+}
+
+export default function FakeChat({
+  locale,
+  translations,
+  fakeReplies,
+  safetyKeywords,
+}: FakeChatProps) {
   const router = useRouter();
   const [messages, setMessages] = useState<ChatMessage[]>(() => {
     if (typeof window === "undefined") return [];
@@ -72,36 +77,52 @@ export default function FakeChat() {
     };
   }, []);
 
-  const handleSend = useCallback((text: string) => {
-    const userMessage: ChatMessage = {
-      id: generateId(),
-      text,
-      sender: "user",
-      timestamp: new Date(),
-    };
+  const containsSafetyKeyword = useCallback(
+    (text: string) => {
+      const lower = text.toLowerCase();
+      return safetyKeywords.some((keyword) => lower.includes(keyword.toLowerCase()));
+    },
+    [safetyKeywords]
+  );
 
-    setMessages((prev) => [...prev, userMessage]);
+  const getRandomFakeReply = useCallback(() => {
+    const index = Math.floor(Math.random() * fakeReplies.length);
+    return fakeReplies[index];
+  }, [fakeReplies]);
 
-    // Safety check — client-side only, no data leaves the browser
-    if (containsSafetyKeyword(text)) {
-      setShowSafetyBanner(true);
-    }
-
-    const delay = getFakeReplyDelay();
-    setIsTyping(true);
-
-    typingTimeoutRef.current = setTimeout(async () => {
-      const genAiReply = await generateGenAiReply(text);
-      const replyMessage: ChatMessage = {
+  const handleSend = useCallback(
+    async (text: string) => {
+      const userMessage: ChatMessage = {
         id: generateId(),
-        text: genAiReply ?? getRandomFakeReply(),
-        sender: "void",
+        text,
+        sender: "user",
         timestamp: new Date(),
       };
-      setIsTyping(false);
-      setMessages((prev) => [...prev, replyMessage]);
-    }, delay);
-  }, []);
+
+      setMessages((prev) => [...prev, userMessage]);
+
+      // Safety check — client-side only, no data leaves the browser
+      if (containsSafetyKeyword(text)) {
+        setShowSafetyBanner(true);
+      }
+
+      const delay = getFakeReplyDelay();
+      setIsTyping(true);
+
+      typingTimeoutRef.current = setTimeout(async () => {
+        const genAiReply = await generateGenAiReply(text);
+        const replyMessage: ChatMessage = {
+          id: generateId(),
+          text: genAiReply ?? getRandomFakeReply(),
+          sender: "void",
+          timestamp: new Date(),
+        };
+        setIsTyping(false);
+        setMessages((prev) => [...prev, replyMessage]);
+      }, delay);
+    },
+    [containsSafetyKeyword, getRandomFakeReply]
+  );
 
   const handleDeleteConfirm = useCallback(() => {
     setShowDeleteDialog(false);
@@ -109,7 +130,6 @@ export default function FakeChat() {
   }, []);
 
   const handleBurnComplete = useCallback(() => {
-    // Clear all messages from React state and localStorage — they are permanently gone
     localStorage.removeItem(STORAGE_KEY);
     setMessages([]);
     if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
@@ -123,7 +143,7 @@ export default function FakeChat() {
   }, []);
 
   if (chatState === "burning") {
-    return <BurnAnimation onComplete={handleBurnComplete} />;
+    return <BurnAnimation onComplete={handleBurnComplete} translations={{ burning: translations.burning, gone: translations.gone }} />;
   }
 
   if (chatState === "after") {
@@ -132,33 +152,32 @@ export default function FakeChat() {
         <div className="text-6xl mb-6" aria-hidden="true">
           ✦
         </div>
-        <h1 className="text-4xl font-bold text-zinc-100 mb-3">Gone.</h1>
+        <h1 className="text-4xl font-bold text-zinc-100 mb-3">{translations.after.headline}</h1>
         <p className="text-zinc-400 text-lg mb-2">
-          You wrote it here. You didn&apos;t send it.
+          {translations.after.subheadline}
         </p>
         <p className="text-zinc-500 text-sm mb-10 max-w-xs leading-relaxed">
-          Take 10 seconds before deciding what to do next. You can write a
-          calmer version, walk away, or do nothing.
+          {translations.after.body}
         </p>
         <div className="flex flex-col gap-3 w-full max-w-xs">
           <Button onClick={handleStartAgain} size="lg" className="w-full">
-            Start another private dump
+            {translations.after.again}
           </Button>
           <Button
             variant="outline"
             size="lg"
             className="w-full"
-            onClick={() => router.push("/calm-reply")}
+            onClick={() => router.push(`/${locale}/calm-reply`)}
           >
-            Write a calmer version
+            {translations.after.calmer}
           </Button>
           <Button
             variant="ghost"
             size="md"
             className="w-full text-zinc-500"
-            onClick={() => router.push("/")}
+            onClick={() => router.push(`/${locale}`)}
           >
-            Leave it deleted
+            {translations.after.leave}
           </Button>
         </div>
       </div>
@@ -167,11 +186,10 @@ export default function FakeChat() {
 
   return (
     <div className="fixed inset-0 flex flex-col bg-zinc-950 max-w-lg mx-auto">
-      {/* Header */}
       <div className="flex items-center justify-between gap-2 px-3 sm:px-4 pt-safe py-3 border-b border-zinc-800 bg-zinc-950/95 backdrop-blur-sm">
         <button
-          onClick={() => router.push("/")}
-          aria-label="Back to home"
+          onClick={() => router.push(`/${locale}`)}
+          aria-label={translations.backAria}
           className="flex items-center justify-center -ml-1 w-10 h-10 rounded-full text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900 transition-colors flex-shrink-0"
         >
           <svg
@@ -195,8 +213,8 @@ export default function FakeChat() {
             V
           </div>
           <div className="min-w-0">
-            <p className="font-semibold text-zinc-100 text-sm truncate">Void</p>
-            <p className="text-xs text-green-400">● Private</p>
+            <p className="font-semibold text-zinc-100 text-sm truncate">{translations.voidName}</p>
+            <p className="text-xs text-green-400">{translations.statusPrivate}</p>
           </div>
         </div>
         <Button
@@ -204,30 +222,29 @@ export default function FakeChat() {
           size="sm"
           onClick={() => setShowDeleteDialog(true)}
           disabled={messages.length === 0}
-          aria-label="Delete chat"
+          aria-label={translations.deleteAria}
           className="flex-shrink-0"
         >
-          🔥 Delete
+          {translations.deleteBtn}
         </Button>
       </div>
 
-      {/* Safety Banner */}
       <SafetyBanner
         visible={showSafetyBanner}
         onDismiss={() => setShowSafetyBanner(false)}
+        locale={locale}
+        translations={translations.safety}
       />
 
-      {/* Privacy Pill */}
       <div className="px-4 pt-3 flex justify-center">
-        <PrivacyPill />
+        <PrivacyPill text={translations.privacyPill} />
       </div>
 
-      {/* Messages */}
       <div
         className="flex-1 overflow-y-auto overscroll-contain px-3 py-4 space-y-1"
         role="log"
         aria-live="polite"
-        aria-label="Chat messages"
+        aria-label={translations.messagesAria}
       >
         {messages.length === 0 && (
           <div className="flex flex-col items-center justify-center h-full text-center py-12">
@@ -235,26 +252,30 @@ export default function FakeChat() {
               🕳️
             </div>
             <p className="text-zinc-500 text-sm max-w-xs leading-relaxed">
-              Write anything here. The Void is listening. Nothing leaves this
-              screen.
+              {translations.emptyState}
             </p>
           </div>
         )}
         {messages.map((message) => (
           <ChatBubble key={message.id} message={message} />
         ))}
-        {isTyping && <TypingIndicator />}
+        {isTyping && <TypingIndicator label={translations.typingAria} />}
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input */}
-      <ChatInput onSend={handleSend} disabled={isTyping} />
+      <ChatInput
+        onSend={handleSend}
+        disabled={isTyping}
+        placeholder={translations.placeholder}
+        sendAria={translations.sendAria}
+        inputAria={translations.inputAria}
+      />
 
-      {/* Delete Dialog */}
       <DeleteChatDialog
         open={showDeleteDialog}
         onClose={() => setShowDeleteDialog(false)}
         onConfirm={handleDeleteConfirm}
+        translations={translations.deleteDialog}
       />
     </div>
   );

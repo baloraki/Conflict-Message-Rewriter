@@ -3,22 +3,47 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Button from "@/components/ui/Button";
+import LanguageSwitcher from "@/components/layout/LanguageSwitcher";
 import ShareSheet from "@/components/ui/ShareSheet";
 import { cn } from "@/lib/utils";
+import { isLocale, DEFAULT_LOCALE } from "@/i18n/config";
 
-export default function Header() {
+interface HeaderProps {
+  translations: {
+    homeAria: string;
+    nav: { about: string; privacy: string };
+    ctaFull: string;
+    ctaShort: string;
+  };
+}
+
+export default function Header({ translations }: HeaderProps) {
   const pathname = usePathname();
-  const isChatPage = pathname === "/chat";
+
+  const segments = pathname.split("/");
+  const localeFromPath = segments[1];
+  const currentLocale = isLocale(localeFromPath) ? localeFromPath : DEFAULT_LOCALE;
+
+  const pathWithoutLocale = isLocale(localeFromPath)
+    ? "/" + segments.slice(2).join("/")
+    : pathname;
+
+  const isChatPage = pathWithoutLocale === "/chat" || pathWithoutLocale === "/chat/";
 
   if (isChatPage) return null;
+
+  const aboutHref = `/${currentLocale}/about`;
+  const privacyHref = `/${currentLocale}/privacy`;
+  const homeHref = `/${currentLocale}`;
+  const chatHref = `/${currentLocale}/chat`;
 
   return (
     <header className="sticky top-0 z-40 border-b border-zinc-800 bg-zinc-950/90 backdrop-blur-sm pt-safe">
       <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between gap-2">
         <Link
-          href="/"
+          href={homeHref}
           className="flex items-center gap-2 min-w-0"
-          aria-label="Burn After Chat — Home"
+          aria-label={translations.homeAria}
         >
           <span className="text-xl flex-shrink-0" aria-hidden="true">
             🔥
@@ -29,28 +54,28 @@ export default function Header() {
         </Link>
         <nav className="hidden sm:flex items-center gap-1" aria-label="Primary">
           <Link
-            href="/about"
-            aria-current={pathname === "/about" ? "page" : undefined}
+            href={aboutHref}
+            aria-current={pathWithoutLocale === "/about" ? "page" : undefined}
             className={cn(
               "px-3 py-1.5 text-sm rounded-lg transition-colors",
-              pathname === "/about"
+              pathWithoutLocale === "/about"
                 ? "text-zinc-100 bg-zinc-800"
                 : "text-zinc-400 hover:text-zinc-100"
             )}
           >
-            About
+            {translations.nav.about}
           </Link>
           <Link
-            href="/privacy"
-            aria-current={pathname === "/privacy" ? "page" : undefined}
+            href={privacyHref}
+            aria-current={pathWithoutLocale === "/privacy" ? "page" : undefined}
             className={cn(
               "px-3 py-1.5 text-sm rounded-lg transition-colors",
-              pathname === "/privacy"
+              pathWithoutLocale === "/privacy"
                 ? "text-zinc-100 bg-zinc-800"
                 : "text-zinc-400 hover:text-zinc-100"
             )}
           >
-            Privacy
+            {translations.nav.privacy}
           </Link>
         </nav>
         <div className="flex items-center gap-2 flex-shrink-0">
@@ -60,10 +85,11 @@ export default function Header() {
             title="Burn After Chat"
             text="Write the angry text, drunk reply, or 2 a.m. rant — then burn it. 🔥"
           />
-          <Link href="/chat">
+          <LanguageSwitcher />
+          <Link href={chatHref} className="flex-shrink-0">
             <Button size="sm">
-              <span className="hidden sm:inline">Start a private dump</span>
-              <span className="sm:hidden">🔥 Start</span>
+              <span className="hidden sm:inline">{translations.ctaFull}</span>
+              <span className="sm:hidden">{translations.ctaShort}</span>
             </Button>
           </Link>
         </div>

@@ -2,9 +2,13 @@ import { cn } from "@/lib/utils";
 
 interface PrivacyPillProps {
   className?: string;
+  text?: string;
 }
 
-export default function PrivacyPill({ className }: PrivacyPillProps) {
+export default function PrivacyPill({
+  className,
+  text = "Local only. Nothing is saved. Nothing is sent.",
+}: PrivacyPillProps) {
   return (
     <div
       className={cn(
@@ -14,7 +18,7 @@ export default function PrivacyPill({ className }: PrivacyPillProps) {
       )}
     >
       <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-      Local only. Nothing is saved. Nothing is sent.
+      {text}
     </div>
   );
 }

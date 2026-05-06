@@ -4,9 +4,16 @@ import { useEffect, useState } from "react";
 
 interface BurnAnimationProps {
   onComplete: () => void;
+  translations?: {
+    burning: string;
+    gone: string;
+  };
 }
 
-export default function BurnAnimation({ onComplete }: BurnAnimationProps) {
+export default function BurnAnimation({
+  onComplete,
+  translations = { burning: "Erasing…", gone: "Gone." },
+}: BurnAnimationProps) {
   const [stage, setStage] = useState<"burning" | "done">("burning");
 
   useEffect(() => {
@@ -31,7 +38,7 @@ export default function BurnAnimation({ onComplete }: BurnAnimationProps) {
         )}
       </div>
       <p className="mt-8 text-zinc-400 text-lg font-medium animate-pulse">
-        {stage === "burning" ? "Erasing…" : "Gone."}
+        {stage === "burning" ? translations.burning : translations.gone}
       </p>
     </div>
   );

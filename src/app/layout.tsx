@@ -1,8 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import MobileNav from "@/components/layout/MobileNav";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -204,22 +201,45 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="bg-zinc-950 text-zinc-100 min-h-dvh-screen font-sans antialiased">
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-3 focus:py-2 focus:bg-zinc-900 focus:text-zinc-100 focus:rounded-md focus:ring-2 focus:ring-orange-500"
-        >
-          Skip to content
-        </a>
-        <Header />
-        <main id="main" className="pb-20 sm:pb-0">
-          {children}
-        </main>
-        <Footer />
-        <MobileNav />
+        {children}
         <Analytics />
         <SpeedInsights />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const LOCALES = ['en', 'de', 'tr', 'es'];
+                const path = window.location.pathname;
+                const lang = path.split('/')[1];
+
+                // Update HTML lang and dir based on URL
+                if (lang && LOCALES.includes(lang)) {
+                  document.documentElement.lang = lang;
+                  document.documentElement.dir = 'ltr';
+                }
+
+                // Sync localStorage preference to cookie if missing
+                try {
+                  const stored = localStorage.getItem('preferred_locale');
+                  const cookieMatch = document.cookie.match(/NEXT_LOCALE=([^;]+)/);
+                  const cookieValue = cookieMatch ? cookieMatch[1] : null;
+
+                  if (stored && LOCALES.includes(stored) && stored !== cookieValue) {
+                    const oneYear = 60 * 60 * 24 * 365;
+                    document.cookie = 'NEXT_LOCALE=' + stored + '; path=/; max-age=' + oneYear + '; SameSite=Lax';
+                  }
+
+                  // Save current URL locale to localStorage
+                  if (lang && LOCALES.includes(lang)) {
+                    localStorage.setItem('preferred_locale', lang);
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
       </body>
     </html>
   );
