@@ -204,7 +204,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="bg-zinc-950 text-zinc-100 min-h-dvh-screen font-sans antialiased">
         <a
           href="#main"
@@ -220,6 +220,19 @@ export default function RootLayout({
         <MobileNav />
         <Analytics />
         <SpeedInsights />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const lang = window.location.pathname.split('/')[1];
+                if (lang && ['en', 'de', 'tr', 'es'].includes(lang)) {
+                  document.documentElement.lang = lang;
+                  document.documentElement.dir = ['tr'].includes(lang) ? 'rtl' : 'ltr';
+                }
+              })();
+            `,
+          }}
+        />
       </body>
     </html>
   );
