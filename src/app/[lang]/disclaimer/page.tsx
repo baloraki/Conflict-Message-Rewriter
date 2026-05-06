@@ -1,92 +1,103 @@
-import type { Metadata } from "next";
-import DisclaimerBox from "@/components/product/DisclaimerBox";
+import { getDictionary } from "@/i18n/dictionaries";
+import { isLocale } from "@/i18n/config";
+import type { Locale } from "@/i18n/config";
+import Card from "@/components/ui/Card";
 
-export const metadata: Metadata = {
-  title: "Safety Disclaimer & Crisis Resources",
-  description:
-    "Crisis hotlines and safety information for people in distress. Burn After Chat is a private venting tool — not therapy, crisis support, legal advice or professional mediation. If you are in danger, please use the emergency resources listed here.",
-  alternates: { canonical: "/disclaimer" },
-  openGraph: {
-    title: "Safety Disclaimer & Crisis Resources — Burn After Chat",
-    description:
-      "Crisis hotlines and safety information. This app is not crisis support — please use the emergency resources here if you are in danger.",
-    url: "/disclaimer",
-    type: "article",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
 
-export default function DisclaimerPage() {
+  if (!isLocale(lang)) {
+    return {};
+  }
+
+  const locale = lang as Locale;
+  const dictionary = await getDictionary(locale);
+
+  return {
+    title: dictionary.meta.disclaimer.title,
+    description: dictionary.meta.disclaimer.description,
+    alternates: { canonical: `/${locale}/disclaimer` },
+    openGraph: {
+      title: dictionary.meta.disclaimer.title,
+      description: dictionary.meta.disclaimer.description,
+      url: `/${locale}/disclaimer`,
+      type: "article",
+    },
+  };
+}
+
+export default async function DisclaimerPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+
+  if (!isLocale(lang)) {
+    return null;
+  }
+
+  const locale = lang as Locale;
+  const dictionary = await getDictionary(locale);
+  const { disclaimerPage } = dictionary;
+
   return (
     <div className="max-w-2xl mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold text-zinc-100 mb-2">
-        Safety Disclaimer
+        {disclaimerPage.title}
       </h1>
-      <p className="text-zinc-500 text-sm mb-8">Please read this carefully.</p>
+      <p className="text-zinc-400 text-lg mb-8 leading-relaxed">
+        {disclaimerPage.intro}
+      </p>
 
-      <div className="space-y-6 text-zinc-300 leading-relaxed">
-        <div className="p-5 rounded-xl bg-red-950/30 border border-red-800">
-          <h2 className="text-xl font-semibold text-red-300 mb-3">
-            If you are in immediate danger
+      <div className="space-y-8">
+        {/* Danger Section */}
+        <Card className="border-red-900/50 bg-red-950/20 p-6">
+          <h2 className="text-xl font-semibold text-red-400 mb-3">
+            {disclaimerPage.danger.title}
           </h2>
-          <p className="text-red-200">
-            Stop using this app and contact emergency services immediately. Call
-            911 (US), 999 (UK), 112 (EU), or your local emergency number. This
-            app cannot help in emergencies.
+          <p className="text-zinc-300 leading-relaxed">
+            {disclaimerPage.danger.body}
           </p>
-        </div>
+        </Card>
 
-        <div className="p-5 rounded-xl bg-zinc-900 border border-zinc-700">
-          <h2 className="text-xl font-semibold text-zinc-100 mb-3">
-            If you may harm yourself or someone else
+        {/* Harm Section */}
+        <Card className="border-orange-900/50 bg-orange-950/20 p-6">
+          <h2 className="text-xl font-semibold text-orange-400 mb-3">
+            {disclaimerPage.harm.title}
           </h2>
-          <p>
-            Please reach out to a crisis support line or emergency services
-            immediately.
+          <p className="text-zinc-300 leading-relaxed mb-4">
+            {disclaimerPage.harm.body}
           </p>
-          <ul className="mt-3 space-y-2 text-sm list-none">
-            <li>
-              🇺🇸 National Suicide Prevention Lifeline:{" "}
-              <strong className="text-zinc-100">988</strong>
-            </li>
-            <li>
-              🇺🇸 Crisis Text Line: Text{" "}
-              <strong className="text-zinc-100">HOME to 741741</strong>
-            </li>
-            <li>
-              🌍 International resources:{" "}
-              <a
-                href="https://www.iasp.info/resources/Crisis_Centres/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-orange-400 hover:underline"
-              >
-                iasp.info/resources/Crisis_Centres
-              </a>
-            </li>
+          <ul className="space-y-2">
+            {disclaimerPage.harm.hotlines.map((hotline, idx) => (
+              <li key={idx} className="text-zinc-300 text-sm">
+                {hotline}
+              </li>
+            ))}
           </ul>
-        </div>
+        </Card>
 
-        <div className="p-5 rounded-xl bg-zinc-900 border border-zinc-700">
-          <h2 className="text-xl font-semibold text-zinc-100 mb-3">
-            If abuse, stalking, or threats are involved
+        {/* Abuse Section */}
+        <Card className="border-red-900/50 bg-red-950/20 p-6">
+          <h2 className="text-xl font-semibold text-red-400 mb-3">
+            {disclaimerPage.abuse.title}
           </h2>
-          <p>
-            Do not rely on this app. Contact local law enforcement, a domestic
-            violence hotline, or a trusted professional immediately.
+          <p className="text-zinc-300 leading-relaxed mb-4">
+            {disclaimerPage.abuse.body}
           </p>
-          <ul className="mt-3 space-y-2 text-sm list-none">
-            <li>
-              🇺🇸 National Domestic Violence Hotline:{" "}
-              <strong className="text-zinc-100">1-800-799-7233</strong>
-            </li>
-            <li>
-              🇺🇸 RAINN:{" "}
-              <strong className="text-zinc-100">1-800-656-4673</strong>
-            </li>
+          <ul className="space-y-2">
+            {disclaimerPage.abuse.hotlines.map((hotline, idx) => (
+              <li key={idx} className="text-zinc-300 text-sm">
+                {hotline}
+              </li>
+            ))}
           </ul>
-        </div>
-
-        <DisclaimerBox />
+        </Card>
       </div>
     </div>
   );
