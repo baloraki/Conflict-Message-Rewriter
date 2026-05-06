@@ -21,6 +21,7 @@ import {
   getFakeReplyDelay,
 } from "@/lib/chat/fakeReplyGenerator";
 import { containsSafetyKeyword } from "@/lib/chat/safetyKeywords";
+import { generateGenAiReply } from "@/lib/chat/genaiReplyGenerator";
 import { generateId } from "@/lib/utils";
 
 type ChatState = "chat" | "burning" | "after";
@@ -89,10 +90,11 @@ export default function FakeChat() {
     const delay = getFakeReplyDelay();
     setIsTyping(true);
 
-    typingTimeoutRef.current = setTimeout(() => {
+    typingTimeoutRef.current = setTimeout(async () => {
+      const genAiReply = await generateGenAiReply(text);
       const replyMessage: ChatMessage = {
         id: generateId(),
-        text: getRandomFakeReply(),
+        text: genAiReply ?? getRandomFakeReply(),
         sender: "void",
         timestamp: new Date(),
       };
