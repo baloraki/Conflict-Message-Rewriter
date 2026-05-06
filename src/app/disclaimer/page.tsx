@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import DisclaimerBox from "@/components/product/DisclaimerBox";
 
 export const metadata: Metadata = {
-  title: "Safety Disclaimer",
+  title: "Safety Disclaimer & Crisis Resources",
   description:
-    "Crisis resources and safety information. Burn After Chat is not therapy, crisis support, or professional mediation.",
+    "Crisis hotlines and safety information for people in distress. Burn After Chat is a private venting tool — not therapy, crisis support, legal advice or professional mediation. If you are in danger, please use the emergency resources listed here.",
   alternates: { canonical: "/disclaimer" },
   openGraph: {
-    title: "Safety Disclaimer — Burn After Chat",
+    title: "Safety Disclaimer & Crisis Resources — Burn After Chat",
     description:
-      "Crisis resources and safety information. This app is not crisis support.",
+      "Crisis hotlines and safety information. This app is not crisis support — please use the emergency resources here if you are in danger.",
     url: "/disclaimer",
     type: "article",
   },

@@ -8,9 +8,10 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://burnafterchat.app";
 
-const TITLE = "Burn After Chat — Write the message you shouldn't send";
+const TITLE =
+  "Burn After Chat — Vent Anger, Frustration & Stress Privately | No AI, No Account";
 const DESCRIPTION =
-  "A private fake chat to vent before you react. Get the angry text, drunk reply, or emotional draft out of your system. Local-only, no account, no AI, deleted forever in one tap.";
+  "Free private space to vent anger, frustration, stress and rage in a fake chat. Write the angry text to your ex, boss, partner, parents or that one coworker — then burn it. 100% local in your browser, no account, no AI, no tracking. Your unsent message dies when you tap delete.";
 
 export const metadata: Metadata = {
   title: {
@@ -23,21 +24,116 @@ export const metadata: Metadata = {
   referrer: "strict-origin-when-cross-origin",
   category: "lifestyle",
   keywords: [
+    // Brand
     "burn after chat",
+    "burn chat",
+    "burn after writing",
+    // Core promise
     "write the message you shouldn't send",
     "vent before you text",
+    "vent before you send",
+    "vent before you react",
     "private venting app",
+    "anonymous venting online",
+    "anonymous vent space",
+    "place to vent online",
+    "where to vent anonymously",
+    "online venting tool",
+    "safe place to vent",
+    "free venting app",
+    "vent without judgement",
+    // Anger / frustration / rage
+    "anger release tool",
+    "anger management app",
+    "let out anger online",
+    "release frustration online",
+    "how to release pent up anger",
+    "rage release app",
+    "scream into the void",
+    "shout into the void online",
+    "rant anonymously",
+    "online rant app",
+    "let off steam online",
+    "blow off steam app",
+    "stress relief app",
+    "emotional release tool",
+    // Specific contexts (text someone)
     "fake chat to vent",
+    "fake text app for venting",
+    "fake messenger to vent",
+    "pretend chat for feelings",
     "anger chat journal",
-    "calm down before replying",
     "emotional draft message",
-    "stop yourself from sending",
+    "stop yourself from sending a text",
+    "how to not send an angry text",
+    "how to stop drunk texting",
     "drunk text prevention",
-    "rage text",
+    "drunk texting alternative",
+    "rage text simulator",
     "don't send that text",
-    "burn after writing",
-    "mental decluttering",
+    "unsent message journal",
+    "draft messages you shouldn't send",
     "write angry message safely",
+    "calm down before replying",
+    "calm down before texting",
+    // Relationship & life situations
+    "vent about ex",
+    "vent about boyfriend",
+    "vent about girlfriend",
+    "vent about husband",
+    "vent about wife",
+    "vent about partner",
+    "vent about boss",
+    "vent about coworker",
+    "vent about your job",
+    "vent about parents",
+    "vent about family",
+    "vent about friends",
+    "vent about roommate",
+    "vent after argument",
+    "vent after breakup",
+    "vent after fight",
+    "vent after work",
+    "vent late at night",
+    // Workplace
+    "calm reply to angry email",
+    "draft a calm email",
+    "rewrite angry message",
+    "professional reply to rude email",
+    // Online conflict
+    "before posting on social media",
+    "draft before tweeting",
+    "comment you should not post",
+    "stop yourself from posting",
+    // Mental wellbeing
+    "mental decluttering",
+    "brain dump app",
+    "thought dump online",
+    "private digital journal",
+    "anonymous diary online",
+    "journal alternative",
+    "emotional regulation tool",
+    "pause before reacting",
+    "cool off app",
+    "cooling off period for messages",
+    // Privacy
+    "no account journal",
+    "no sign up vent app",
+    "no AI chat",
+    "private writing tool",
+    "local only writing app",
+    "browser only vent app",
+    // Multilingual reach (common venting queries)
+    "wut rauslassen",
+    "frust ablassen online",
+    "anonym frust ablassen",
+    "fake chat zum dampf ablassen",
+    "wütende nachricht entwurf",
+    "desahogarse online",
+    "déverser sa colère",
+    "sfogarsi online",
+    "怒りを発散",
+    "выпустить злость",
   ],
   metadataBase: new URL(siteUrl),
   alternates: {
@@ -53,6 +149,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: "Burn After Chat",
     locale: "en_US",
+    alternateLocale: ["en_GB", "de_DE", "es_ES", "fr_FR", "it_IT", "pt_BR"],
   },
   twitter: {
     card: "summary_large_image",

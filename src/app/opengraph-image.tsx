@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const alt =
-  "Burn After Chat — Write the message you should not send. Private, local, no AI.";
+  "Burn After Chat — Vent anger, frustration and stress in a private fake chat. Write the message you should not send to your ex, boss, partner or family. Local-only, no account, no AI, deleted forever.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -70,8 +70,8 @@ export default function OpenGraphImage() {
             lineHeight: 1.35,
           }}
         >
-          A private fake chat to vent before you react. Local-only. No account.
-          No AI.
+          A private fake chat to vent anger, frustration & stress — about your
+          ex, boss, family, anyone. Local-only. No account. No AI.
         </div>
 
         <div

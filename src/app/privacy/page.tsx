@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy",
+  title: "Privacy Policy — Anonymous, Local-Only, No AI, No Tracking",
   description:
-    "How Burn After Chat handles your data. Spoiler: it doesn't collect any. No accounts, no servers receiving your chat, no AI processing.",
+    "How Burn After Chat handles your data: it doesn't collect any. No accounts, no servers receiving your chat, no AI processing your messages, no tracking of what you write. Here's exactly what happens — and doesn't happen — when you type.",
   alternates: { canonical: "/privacy" },
   openGraph: {
-    title: "Privacy Policy — Burn After Chat",
+    title: "Privacy Policy — Anonymous, Local-Only, No AI, No Tracking",
     description:
-      "No accounts, no servers receiving chat, no AI. Here's exactly what happens to what you type.",
+      "No accounts, no servers receiving chat, no AI, no tracking inside the chat. Here's exactly what happens to what you type.",
     url: "/privacy",
     type: "article",
   },
