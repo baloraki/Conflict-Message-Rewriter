@@ -1,25 +1,10 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 
-export const metadata: Metadata = {
-  title:
-    "About Burn After Chat — Why a Fake Chat Is the Safest Place to Vent",
-  description:
-    "Why Burn After Chat exists: a private fake chat for venting anger and frustration without sending. Why the recipient is fake, why we use no AI, and why permanent deletion is the whole point of the app.",
-  alternates: { canonical: "/about" },
-  openGraph: {
-    title:
-      "About Burn After Chat — Why a Fake Chat Is the Safest Place to Vent",
-    description:
-      "Fake recipient. No AI. Deletion is the feature. Here's why a private vent space without an audience or algorithm beats screaming into a real inbox.",
-    url: "/about",
-    type: "article",
-  },
-};
-
-export default function AboutPage() {
+export default function AboutPageContent() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold text-zinc-100 mb-2">

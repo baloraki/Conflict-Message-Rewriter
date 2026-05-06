@@ -1,20 +1,6 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy — Anonymous, Local-Only, No AI, No Tracking",
-  description:
-    "How Burn After Chat handles your data: it doesn't collect any. No accounts, no servers receiving your chat, no AI processing your messages, no tracking of what you write. Here's exactly what happens — and doesn't happen — when you type.",
-  alternates: { canonical: "/privacy" },
-  openGraph: {
-    title: "Privacy Policy — Anonymous, Local-Only, No AI, No Tracking",
-    description:
-      "No accounts, no servers receiving chat, no AI, no tracking inside the chat. Here's exactly what happens to what you type.",
-    url: "/privacy",
-    type: "article",
-  },
-};
-
-export default function PrivacyPage() {
+export default function PrivacyPageContent() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold text-zinc-100 mb-2">Privacy Policy</h1>
@@ -79,11 +65,21 @@ export default function PrivacyPage() {
 
         <section>
           <h2 className="text-xl font-semibold text-zinc-100 mb-3">
-            Analytics and tracking
+            Analytics
           </h2>
           <p>
-            No analytics or tracking scripts are included by default. The app
-            is designed to be as private as possible.
+            This site uses Vercel Analytics and Speed Insights to collect
+            anonymous usage data (page views, performance metrics). No
+            personally identifiable information is collected. See{" "}
+            <a
+              href="https://vercel.com/legal/privacy-policy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-orange-400 hover:underline"
+            >
+              Vercel&apos;s privacy policy
+            </a>{" "}
+            for details.
           </p>
         </section>
 
@@ -105,8 +101,31 @@ export default function PrivacyPage() {
           <p>
             If you use the contact form, your message is submitted to a
             third-party form service (Web3Forms). Only what you type in the form
-            is transmitted. See Web3Forms&apos; privacy policy for how they
-            handle form submissions.
+            is transmitted. See{" "}
+            <a
+              href="https://web3forms.com/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-orange-400 hover:underline"
+            >
+              Web3Forms&apos; privacy policy
+            </a>{" "}
+            for how they handle form submissions.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-xl font-semibold text-zinc-100 mb-3">
+            Your rights
+          </h2>
+          <p>
+            Because we do not collect personal data, there is nothing for us to
+            provide, correct, or delete. If you have questions about privacy,
+            reach out via the{" "}
+            <a href="/contact" className="text-orange-400 hover:underline">
+              contact page
+            </a>
+            .
           </p>
         </section>
       </div>
