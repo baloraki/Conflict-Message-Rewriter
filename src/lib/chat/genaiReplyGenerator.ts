@@ -1,8 +1,20 @@
 const TASKS_GENAI_CDN_URL =
   "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-genai@latest";
+const TASKS_GENAI_WASM_PATH =
+  "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-genai@latest/wasm";
 
 const SYSTEM_PROMPT =
   "You are the Void in a private venting chat. Reply in 1 short sentence, calm and non-judgmental.";
+
+type LlmResponse = { responseText?: string };
+
+type LlmInferenceInstance = {
+  generateResponse: (
+    input: string,
+    callback?: (partialResult: string, done: boolean) => void,
+  ) => Promise<LlmResponse> | void;
+  close?: () => void;
+};
 
 type GenAiModule = {
   FilesetResolver?: {
@@ -12,17 +24,11 @@ type GenAiModule = {
     createFromOptions: (
       fileset: unknown,
       options: Record<string, unknown>,
-    ) => Promise<{
-      generateResponse: (input: string) => Promise<{ responseText?: string }>;
-      close?: () => void;
-    }>;
+    ) => Promise<LlmInferenceInstance>;
   };
 };
 
-let modelPromise: Promise<{
-  generateResponse: (input: string) => Promise<{ responseText?: string }>;
-  close?: () => void;
-} | null> | null = null;
+let modelPromise: Promise<LlmInferenceInstance | null> | null = null;
 
 async function loadModule(): Promise<GenAiModule | null> {
   if (typeof window === "undefined") return null;
@@ -32,7 +38,8 @@ async function loadModule(): Promise<GenAiModule | null> {
       /* webpackIgnore: true */ TASKS_GENAI_CDN_URL
     )) as GenAiModule;
     return genAiLib;
-  } catch {
+  } catch (error) {
+    console.warn("[genai] Could not load @mediapipe/tasks-genai", error);
     return null;
   }
 }
@@ -44,7 +51,9 @@ async function getModel() {
       if (!genAiLib?.FilesetResolver || !genAiLib?.LlmInference) return null;
 
       try {
-        const fileset = await genAiLib.FilesetResolver.forGenAiTasks();
+        const fileset = await genAiLib.FilesetResolver.forGenAiTasks(
+          TASKS_GENAI_WASM_PATH,
+        );
 
         return await genAiLib.LlmInference.createFromOptions(fileset, {
           baseOptions: {
@@ -53,8 +62,10 @@ async function getModel() {
           maxTokens: 60,
           topK: 20,
           temperature: 0.8,
+          randomSeed: 42,
         });
-      } catch {
+      } catch (error) {
+        console.warn("[genai] Could not initialize LLM inference", error);
         return null;
       }
     })();
@@ -63,18 +74,42 @@ async function getModel() {
   return modelPromise;
 }
 
+async function generateWithCallbackApi(
+  model: LlmInferenceInstance,
+  prompt: string,
+): Promise<string | null> {
+  return new Promise((resolve) => {
+    let text = "";
+
+    try {
+      model.generateResponse(prompt, (partialResult, done) => {
+        text += partialResult;
+        if (done) resolve(text.trim() || null);
+      });
+    } catch {
+      resolve(null);
+    }
+
+    setTimeout(() => resolve(text.trim() || null), 8_000);
+  });
+}
+
 export async function generateGenAiReply(userText: string): Promise<string | null> {
   const model = await getModel();
   if (!model) return null;
 
-  try {
-    const result = await model.generateResponse(
-      `${SYSTEM_PROMPT}\n\nUser: ${userText}\nVoid:`,
-    );
+  const prompt = `${SYSTEM_PROMPT}\n\nUser: ${userText}\nVoid:`;
 
-    const text = result.responseText?.trim();
-    return text || null;
+  try {
+    const maybePromise = model.generateResponse(prompt);
+    if (maybePromise && typeof (maybePromise as Promise<LlmResponse>).then === "function") {
+      const result = await (maybePromise as Promise<LlmResponse>);
+      const text = result.responseText?.trim();
+      return text || null;
+    }
   } catch {
-    return null;
+    // try callback style API next
   }
+
+  return generateWithCallbackApi(model, prompt);
 }
