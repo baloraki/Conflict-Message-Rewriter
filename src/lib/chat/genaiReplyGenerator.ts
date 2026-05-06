@@ -1,115 +1,178 @@
-const TASKS_GENAI_CDN_URL =
-  "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-genai@latest";
-const TASKS_GENAI_WASM_PATH =
-  "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-genai@latest/wasm";
+// Local on-device text generation in the browser via Transformers.js.
+// No backend/API call is made from this module.
+
+const TRANSFORMERS_CDN_URL =
+  "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1";
+const MODEL_ID = "HuggingFaceTB/SmolLM2-360M-Instruct";
+const MAX_INPUT_CHARS = 2000;
 
 const SYSTEM_PROMPT =
-  "You are the Void in a private venting chat. Reply in 1 short sentence, calm and non-judgmental.";
+  "You are the Void in a private venting chat. Reply in exactly one short sentence. Stay calm, non-judgmental, and emotionally neutral. Do not give advice unless asked. Do not mention AI.";
 
-type LlmResponse = { responseText?: string };
+type ChatRole = "system" | "user";
+type ChatMessage = { role: ChatRole; content: string };
 
-type LlmInferenceInstance = {
-  generateResponse: (
-    input: string,
-    callback?: (partialResult: string, done: boolean) => void,
-  ) => Promise<LlmResponse> | void;
-  close?: () => void;
+type GenerationOptions = {
+  max_new_tokens: number;
+  temperature: number;
+  top_p: number;
+  do_sample: boolean;
+  return_full_text: boolean;
 };
 
-type GenAiModule = {
-  FilesetResolver?: {
-    forGenAiTasks: (basePath?: string) => Promise<unknown>;
-  };
-  LlmInference?: {
-    createFromOptions: (
-      fileset: unknown,
-      options: Record<string, unknown>,
-    ) => Promise<LlmInferenceInstance>;
-  };
+type Generator = (
+  input: string | ChatMessage[],
+  options: GenerationOptions,
+) => Promise<unknown>;
+
+type TransformersModule = {
+  pipeline?: (
+    task: "text-generation",
+    model: string,
+    options?: Record<string, unknown>,
+  ) => Promise<Generator>;
 };
 
-let modelPromise: Promise<LlmInferenceInstance | null> | null = null;
+let generatorPromise: Promise<Generator | null> | null = null;
 
-async function loadModule(): Promise<GenAiModule | null> {
+function withTimeout<T>(promise: Promise<T>, timeoutMs: number): Promise<T> {
+  return new Promise((resolve, reject) => {
+    const id = setTimeout(() => reject(new Error("Generation timeout")), timeoutMs);
+    promise
+      .then((value) => {
+        clearTimeout(id);
+        resolve(value);
+      })
+      .catch((error: unknown) => {
+        clearTimeout(id);
+        reject(error);
+      });
+  });
+}
+
+async function loadTransformers(): Promise<TransformersModule | null> {
   if (typeof window === "undefined") return null;
 
   try {
-    const genAiLib = (await import(
-      /* webpackIgnore: true */ TASKS_GENAI_CDN_URL
-    )) as GenAiModule;
-    return genAiLib;
+    const transformersModule = (await import(
+      /* webpackIgnore: true */ TRANSFORMERS_CDN_URL
+    )) as TransformersModule;
+    return transformersModule;
   } catch (error) {
-    console.warn("[genai] Could not load @mediapipe/tasks-genai", error);
+    console.warn("[genai] Could not load Transformers.js", error);
     return null;
   }
 }
 
-async function getModel() {
-  if (!modelPromise) {
-    modelPromise = (async () => {
-      const genAiLib = await loadModule();
-      if (!genAiLib?.FilesetResolver || !genAiLib?.LlmInference) return null;
+async function getGenerator(): Promise<Generator | null> {
+  if (!generatorPromise) {
+    generatorPromise = (async () => {
+      const transformersModule = await loadTransformers();
+      if (!transformersModule?.pipeline) return null;
 
       try {
-        const fileset = await genAiLib.FilesetResolver.forGenAiTasks(
-          TASKS_GENAI_WASM_PATH,
-        );
-
-        return await genAiLib.LlmInference.createFromOptions(fileset, {
-          baseOptions: {
-            modelAssetPath: "/models/gemma-2b-it.task",
-          },
-          maxTokens: 60,
-          topK: 20,
-          temperature: 0.8,
-          randomSeed: 42,
+        return await transformersModule.pipeline("text-generation", MODEL_ID, {
+          device: "webgpu",
+          dtype: "q4f16",
         });
-      } catch (error) {
-        console.warn("[genai] Could not initialize LLM inference", error);
+      } catch (webGpuError) {
+        console.warn("[genai] WebGPU init failed, trying CPU/WASM fallback", webGpuError);
+      }
+
+      try {
+        return await transformersModule.pipeline("text-generation", MODEL_ID, {
+          device: "wasm",
+          dtype: "q8",
+        });
+      } catch (wasmError) {
+        console.warn("[genai] CPU/WASM fallback init failed", wasmError);
         return null;
       }
     })();
   }
 
-  return modelPromise;
+  return generatorPromise;
 }
 
-async function generateWithCallbackApi(
-  model: LlmInferenceInstance,
-  prompt: string,
-): Promise<string | null> {
-  return new Promise((resolve) => {
-    let text = "";
+function extractGeneratedText(raw: unknown): string | null {
+  if (typeof raw === "string") return raw;
+  if (!Array.isArray(raw) || raw.length === 0) return null;
 
-    try {
-      model.generateResponse(prompt, (partialResult, done) => {
-        text += partialResult;
-        if (done) resolve(text.trim() || null);
-      });
-    } catch {
-      resolve(null);
+  const first = raw[0];
+  if (typeof first === "string") return first;
+  if (!first || typeof first !== "object") return null;
+
+  const maybeGenerated = (first as { generated_text?: unknown }).generated_text;
+  if (typeof maybeGenerated === "string") return maybeGenerated;
+
+  if (Array.isArray(maybeGenerated)) {
+    const reversed = [...maybeGenerated].reverse();
+    for (const part of reversed) {
+      if (!part || typeof part !== "object") continue;
+      const content = (part as { content?: unknown }).content;
+      if (typeof content === "string" && content.trim()) return content;
     }
+  }
 
-    setTimeout(() => resolve(text.trim() || null), 8_000);
-  });
+  return null;
+}
+
+function normalizeReplyText(text: string): string | null {
+  const withoutLabel = text
+    .trim()
+    .replace(/^(Void|Assistant|AI|Bot|Response)\s*:\s*/i, "")
+    .trim();
+
+  if (!withoutLabel) return null;
+
+  const oneSentence = withoutLabel.split(/(?<=[.!?])\s+/)[0]?.trim() ?? withoutLabel;
+  if (!oneSentence) return null;
+
+  return oneSentence.slice(0, 220).trim();
 }
 
 export async function generateGenAiReply(userText: string): Promise<string | null> {
-  const model = await getModel();
-  if (!model) return null;
+  if (typeof window === "undefined") return null;
 
-  const prompt = `${SYSTEM_PROMPT}\n\nUser: ${userText}\nVoid:`;
+  const trimmed = userText.trim();
+  if (!trimmed) return null;
+
+  const safeInput = trimmed.slice(0, MAX_INPUT_CHARS);
+  const generator = await getGenerator();
+  if (!generator) return null;
+
+  const messages: ChatMessage[] = [
+    { role: "system", content: SYSTEM_PROMPT },
+    { role: "user", content: safeInput },
+  ];
+
+  const generationOptions: GenerationOptions = {
+    max_new_tokens: 40,
+    temperature: 0.4,
+    top_p: 0.9,
+    do_sample: true,
+    return_full_text: false,
+  };
 
   try {
-    const maybePromise = model.generateResponse(prompt);
-    if (maybePromise && typeof (maybePromise as Promise<LlmResponse>).then === "function") {
-      const result = await (maybePromise as Promise<LlmResponse>);
-      const text = result.responseText?.trim();
-      return text || null;
-    }
-  } catch {
-    // try callback style API next
-  }
+    const output = await withTimeout(generator(messages, generationOptions), 15_000);
+    const rawText = extractGeneratedText(output);
+    if (!rawText) return null;
+    return normalizeReplyText(rawText);
+  } catch (chatError) {
+    const compactPrompt = `${SYSTEM_PROMPT}\n\nUser: ${safeInput}\nVoid:`;
 
-  return generateWithCallbackApi(model, prompt);
+    try {
+      const output = await withTimeout(
+        generator(compactPrompt, generationOptions),
+        15_000,
+      );
+      const rawText = extractGeneratedText(output);
+      if (!rawText) return null;
+      return normalizeReplyText(rawText);
+    } catch (promptError) {
+      console.warn("[genai] Generation failed", { chatError, promptError });
+      return null;
+    }
+  }
 }

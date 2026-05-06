@@ -8,10 +8,11 @@
     "start": "next start",
     "lint": "eslint src",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@mediapipe/tasks-genai": "^0.10.26",
+    "@huggingface/transformers": "^3.8.1",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "clsx": "^2.1.1",
