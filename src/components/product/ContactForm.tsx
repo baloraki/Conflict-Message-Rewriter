@@ -23,26 +23,28 @@ function FieldError({ msg }: { msg?: string }) {
   return <p className="mt-1 text-xs text-red-400">{msg}</p>;
 }
 
+const DEFAULT_TRANSLATIONS = {
+  name: "Name",
+  namePlaceholder: "Your name",
+  email: "Email",
+  emailPlaceholder: "your@email.com",
+  subject: "Subject",
+  subjectPlaceholder: "What's this about?",
+  message: "Message",
+  messagePlaceholder: "Your message…",
+  submit: "Send message",
+  sending: "Sending…",
+  success: "Message sent. We'll get back to you soon.",
+  error: "Something went wrong. Please try again.",
+  notConfigured: "Contact form is not configured yet.",
+};
+
 interface ContactFormProps {
-  translations: {
-    name: string;
-    namePlaceholder: string;
-    email: string;
-    emailPlaceholder: string;
-    subject: string;
-    subjectPlaceholder: string;
-    message: string;
-    messagePlaceholder: string;
-    submit: string;
-    sending: string;
-    success: string;
-    error: string;
-    notConfigured: string;
-  };
+  translations?: typeof DEFAULT_TRANSLATIONS;
   locale?: string;
 }
 
-export default function ContactForm({ translations, locale = "en" }: ContactFormProps) {
+export default function ContactForm({ translations = DEFAULT_TRANSLATIONS, locale = "en" }: ContactFormProps) {
   const [fields, setFields] = useState<ContactFormFields>(EMPTY);
   const [errors, setErrors] = useState<ContactFormErrors>({});
   const [touched, setTouched] = useState<TouchedFields>({});
