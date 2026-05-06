@@ -131,6 +131,7 @@ function normalizeReplyText(text: string): string | null {
 }
 
 export async function generateGenAiReply(userText: string): Promise<string | null> {
+  if (!process.env.NEXT_PUBLIC_MODEL_ID) return null;
   if (typeof window === "undefined") return null;
 
   const trimmed = userText.trim();
