@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getDictionary } from "@/i18n/dictionaries";
-import { isLocale, LOCALES, LOCALE_LABELS, OG_LOCALE, HTML_LANG } from "@/i18n/config";
+import { isLocale, LOCALES, OG_LOCALE } from "@/i18n/config";
 import type { Locale } from "@/i18n/config";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import MobileNav from "@/components/layout/MobileNav";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://burnafterchat.app";
 
@@ -110,5 +113,23 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  return children;
+  const locale = lang as Locale;
+  const dictionary = await getDictionary(locale);
+
+  return (
+    <>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-3 focus:py-2 focus:bg-zinc-900 focus:text-zinc-100 focus:rounded-md focus:ring-2 focus:ring-orange-500"
+      >
+        {dictionary.layout.skipToContent}
+      </a>
+      <Header translations={dictionary.header} />
+      <main id="main" className="pb-20 sm:pb-0">
+        {children}
+      </main>
+      <Footer locale={locale} translations={dictionary.footer} />
+      <MobileNav translations={dictionary.mobileNav} />
+    </>
+  );
 }

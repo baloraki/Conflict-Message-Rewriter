@@ -1,27 +1,41 @@
 "use client";
 
 import { useState } from "react";
-import { getCalmTemplates, getAllSituations } from "@/lib/calm/calmReplyGenerator";
 import { CalmSituation } from "@/lib/calm/types";
 import TemplateCard from "./TemplateCard";
 import Button from "@/components/ui/Button";
+import type { CalmTemplatesByKey } from "@/i18n/types";
 
-export default function CalmReplyComposer() {
+interface CalmReplyComposerProps {
+  templates: CalmTemplatesByKey;
+  translations: {
+    promptText: string;
+    chooseTemplate: string;
+    differentSituation: string;
+    copy: string;
+    copied: string;
+  };
+}
+
+export default function CalmReplyComposer({ templates, translations }: CalmReplyComposerProps) {
   const [selected, setSelected] = useState<CalmSituation | null>(null);
-  const situations = getAllSituations();
-  const templates = selected ? getCalmTemplates(selected) : [];
+  const situations = (Object.keys(templates) as CalmSituation[]).map((key) => ({
+    value: key,
+    label: templates[key].label,
+  }));
+  const selectedTemplates = selected ? templates[selected].templates : [];
 
   return (
     <div className="space-y-6">
       <div>
         <p className="text-zinc-400 text-sm mb-4">
-          What do you need to communicate?
+          {translations.promptText}
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {situations.map((s) => (
             <button
               key={s.value}
-              onClick={() => setSelected(s.value as CalmSituation)}
+              onClick={() => setSelected(s.value)}
               className={`text-left px-4 py-3 rounded-xl border text-sm transition-all ${
                 selected === s.value
                   ? "border-orange-500 bg-orange-500/10 text-orange-300"
@@ -34,11 +48,16 @@ export default function CalmReplyComposer() {
         </div>
       </div>
 
-      {templates.length > 0 && (
+      {selectedTemplates.length > 0 && (
         <div className="space-y-3">
-          <p className="text-zinc-400 text-sm">Choose a template to copy:</p>
-          {templates.map((template, i) => (
-            <TemplateCard key={i} text={template} />
+          <p className="text-zinc-400 text-sm">{translations.chooseTemplate}</p>
+          {selectedTemplates.map((template, i) => (
+            <TemplateCard
+              key={i}
+              text={template}
+              copyLabel={translations.copy}
+              copiedLabel={translations.copied}
+            />
           ))}
           <Button
             variant="ghost"
@@ -46,7 +65,7 @@ export default function CalmReplyComposer() {
             onClick={() => setSelected(null)}
             className="text-zinc-500 w-full"
           >
-            ← Choose a different situation
+            {translations.differentSituation}
           </Button>
         </div>
       )}

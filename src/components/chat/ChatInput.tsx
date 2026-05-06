@@ -7,11 +7,17 @@ import Button from "@/components/ui/Button";
 interface ChatInputProps {
   onSend: (text: string) => void;
   disabled?: boolean;
+  placeholder?: string;
+  sendAria?: string;
+  inputAria?: string;
 }
 
 export default function ChatInput({
   onSend,
   disabled = false,
+  placeholder = "Write anything. It stays here.",
+  sendAria = "Send message",
+  inputAria = "Message input",
 }: ChatInputProps) {
   const [value, setValue] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -48,11 +54,11 @@ export default function ChatInput({
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={handleKeyDown}
         onInput={handleInput}
-        placeholder="Write anything. It stays here."
+        placeholder={placeholder}
         rows={1}
         disabled={disabled}
         className="min-h-[44px] max-h-[150px] py-3"
-        aria-label="Message input"
+        aria-label={inputAria}
         autoCapitalize="sentences"
         autoComplete="off"
         spellCheck="true"
@@ -61,7 +67,7 @@ export default function ChatInput({
         onClick={handleSend}
         disabled={!value.trim() || disabled}
         className="flex-shrink-0 h-11 w-11 p-0 rounded-xl"
-        aria-label="Send message"
+        aria-label={sendAria}
       >
         <svg
           viewBox="0 0 24 24"

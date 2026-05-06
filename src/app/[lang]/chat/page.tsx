@@ -1,14 +1,44 @@
-import type { Metadata } from "next";
 import FakeChat from "@/components/chat/FakeChat";
+import { getDictionary } from "@/i18n/dictionaries";
+import { isLocale } from "@/i18n/config";
+import type { Locale } from "@/i18n/config";
 
-export const metadata: Metadata = {
-  title: "Private Chat — Vent Here, Burn It After",
-  description:
-    "Your private fake chat to vent. Write anything to anyone. Nothing is sent. Nothing is saved. Delete it when you're done — it's gone forever.",
-  alternates: { canonical: "/chat" },
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  if (!isLocale(lang)) return {};
 
-export default function ChatPage() {
-  return <FakeChat />;
+  const locale = lang as Locale;
+  const dictionary = await getDictionary(locale);
+
+  return {
+    title: dictionary.meta.chat.title,
+    description: dictionary.meta.chat.description,
+    alternates: { canonical: `/${locale}/chat` },
+    robots: { index: false, follow: false },
+  };
+}
+
+export default async function ChatPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  if (!isLocale(lang)) return null;
+
+  const locale = lang as Locale;
+  const dictionary = await getDictionary(locale);
+
+  return (
+    <FakeChat
+      locale={locale}
+      translations={dictionary.chat}
+      fakeReplies={dictionary.fakeReplies}
+      safetyKeywords={dictionary.safetyKeywords}
+    />
+  );
 }

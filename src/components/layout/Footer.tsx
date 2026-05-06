@@ -1,6 +1,22 @@
 import Link from "next/link";
+import type { Locale } from "@/i18n/config";
 
-export default function Footer() {
+interface FooterProps {
+  locale: Locale;
+  translations: {
+    tagline: string;
+    links: {
+      about: string;
+      privacy: string;
+      terms: string;
+      disclaimer: string;
+      contact: string;
+    };
+    disclaimer: string;
+  };
+}
+
+export default function Footer({ locale, translations }: FooterProps) {
   return (
     <footer className="border-t border-zinc-800 bg-zinc-950 py-10">
       <div className="max-w-5xl mx-auto px-4">
@@ -11,47 +27,41 @@ export default function Footer() {
               <span className="font-bold text-zinc-200">Burn After Chat</span>
             </div>
             <p className="text-zinc-500 text-sm max-w-xs">
-              A private fake chat to vent anger, frustration and stress —
-              before you send the message you&apos;d regret.
+              {translations.tagline}
             </p>
           </div>
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-zinc-500">
-            <Link href="/about" className="hover:text-zinc-300 transition-colors">
-              About
+            <Link href={`/${locale}/about`} className="hover:text-zinc-300 transition-colors">
+              {translations.links.about}
             </Link>
             <Link
-              href="/privacy"
+              href={`/${locale}/privacy`}
               className="hover:text-zinc-300 transition-colors"
             >
-              Privacy
+              {translations.links.privacy}
             </Link>
             <Link
-              href="/terms"
+              href={`/${locale}/terms`}
               className="hover:text-zinc-300 transition-colors"
             >
-              Terms
+              {translations.links.terms}
             </Link>
             <Link
-              href="/disclaimer"
+              href={`/${locale}/disclaimer`}
               className="hover:text-zinc-300 transition-colors"
             >
-              Disclaimer
+              {translations.links.disclaimer}
             </Link>
             <Link
-              href="/contact"
+              href={`/${locale}/contact`}
               className="hover:text-zinc-300 transition-colors"
             >
-              Contact
+              {translations.links.contact}
             </Link>
           </div>
         </div>
         <div className="mt-8 pt-6 border-t border-zinc-800 text-xs text-zinc-600 leading-relaxed">
-          <p>
-            This app is not therapy, crisis support, legal advice, or
-            professional mediation. If you feel unsafe, threatened, at risk of
-            harming yourself or someone else, or trapped in abuse, contact local
-            emergency services or a trusted professional.
-          </p>
+          <p>{translations.disclaimer}</p>
         </div>
       </div>
     </footer>

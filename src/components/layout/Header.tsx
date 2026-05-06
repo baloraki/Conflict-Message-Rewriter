@@ -7,15 +7,22 @@ import LanguageSwitcher from "@/components/layout/LanguageSwitcher";
 import { cn } from "@/lib/utils";
 import { isLocale, DEFAULT_LOCALE } from "@/i18n/config";
 
-export default function Header() {
+interface HeaderProps {
+  translations: {
+    homeAria: string;
+    nav: { about: string; privacy: string };
+    ctaFull: string;
+    ctaShort: string;
+  };
+}
+
+export default function Header({ translations }: HeaderProps) {
   const pathname = usePathname();
 
-  // Extract current locale from pathname
   const segments = pathname.split("/");
   const localeFromPath = segments[1];
   const currentLocale = isLocale(localeFromPath) ? localeFromPath : DEFAULT_LOCALE;
 
-  // Build the rest of the path after the locale
   const pathWithoutLocale = isLocale(localeFromPath)
     ? "/" + segments.slice(2).join("/")
     : pathname;
@@ -35,7 +42,7 @@ export default function Header() {
         <Link
           href={homeHref}
           className="flex items-center gap-2 min-w-0"
-          aria-label="Burn After Chat — Home"
+          aria-label={translations.homeAria}
         >
           <span className="text-xl flex-shrink-0" aria-hidden="true">
             🔥
@@ -55,7 +62,7 @@ export default function Header() {
                 : "text-zinc-400 hover:text-zinc-100"
             )}
           >
-            About
+            {translations.nav.about}
           </Link>
           <Link
             href={privacyHref}
@@ -67,15 +74,15 @@ export default function Header() {
                 : "text-zinc-400 hover:text-zinc-100"
             )}
           >
-            Privacy
+            {translations.nav.privacy}
           </Link>
         </nav>
         <div className="flex items-center gap-2">
           <LanguageSwitcher />
           <Link href={chatHref} className="flex-shrink-0">
             <Button size="sm">
-              <span className="hidden sm:inline">Start a private dump</span>
-              <span className="sm:hidden">🔥 Start</span>
+              <span className="hidden sm:inline">{translations.ctaFull}</span>
+              <span className="sm:hidden">{translations.ctaShort}</span>
             </Button>
           </Link>
         </div>

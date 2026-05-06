@@ -2,15 +2,25 @@
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import type { Locale } from "@/i18n/config";
 
 interface SafetyBannerProps {
   visible: boolean;
   onDismiss: () => void;
+  locale: Locale;
+  translations: {
+    title: string;
+    body: string;
+    learnMore: string;
+    dismiss: string;
+  };
 }
 
 export default function SafetyBanner({
   visible,
   onDismiss,
+  locale,
+  translations,
 }: SafetyBannerProps) {
   if (!visible) return null;
 
@@ -24,19 +34,18 @@ export default function SafetyBanner({
       <div className="flex items-start gap-2">
         <span className="text-red-400 mt-0.5">⚠</span>
         <div className="flex-1">
-          <p className="font-medium text-red-300 mb-1">This sounds serious.</p>
+          <p className="font-medium text-red-300 mb-1">{translations.title}</p>
           <p className="text-red-200 text-xs leading-relaxed">
-            This app is not crisis support. If you or someone else may be in
-            danger, contact emergency services or a trusted professional now.{" "}
-            <Link href="/disclaimer" className="underline hover:text-white">
-              Learn more
+            {translations.body}{" "}
+            <Link href={`/${locale}/disclaimer`} className="underline hover:text-white">
+              {translations.learnMore}
             </Link>
           </p>
         </div>
         <button
           onClick={onDismiss}
           className="text-red-400 hover:text-red-200 text-lg leading-none ml-1"
-          aria-label="Dismiss safety banner"
+          aria-label={translations.dismiss}
         >
           ×
         </button>
