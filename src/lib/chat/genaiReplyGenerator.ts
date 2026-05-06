@@ -1,9 +1,8 @@
 // Local on-device text generation in the browser via Transformers.js.
 // No backend/API call is made from this module.
 
-const TRANSFORMERS_CDN_URL =
-  "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1";
-const MODEL_ID = "HuggingFaceTB/SmolLM2-360M-Instruct";
+const MODEL_ID =
+  process.env.NEXT_PUBLIC_MODEL_ID ?? "HuggingFaceTB/SmolLM2-360M-Instruct";
 const MAX_INPUT_CHARS = 2000;
 
 const SYSTEM_PROMPT =
@@ -55,7 +54,7 @@ async function loadTransformers(): Promise<TransformersModule | null> {
 
   try {
     const transformersModule = (await import(
-      /* webpackIgnore: true */ TRANSFORMERS_CDN_URL
+      "@huggingface/transformers"
     )) as TransformersModule;
     return transformersModule;
   } catch (error) {
