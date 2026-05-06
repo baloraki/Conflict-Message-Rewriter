@@ -224,11 +224,32 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
-                const lang = window.location.pathname.split('/')[1];
-                if (lang && ['en', 'de', 'tr', 'es'].includes(lang)) {
+                const LOCALES = ['en', 'de', 'tr', 'es'];
+                const path = window.location.pathname;
+                const lang = path.split('/')[1];
+
+                // Update HTML lang and dir based on URL
+                if (lang && LOCALES.includes(lang)) {
                   document.documentElement.lang = lang;
-                  document.documentElement.dir = ['tr'].includes(lang) ? 'rtl' : 'ltr';
+                  document.documentElement.dir = 'ltr';
                 }
+
+                // Sync localStorage preference to cookie if missing
+                try {
+                  const stored = localStorage.getItem('preferred_locale');
+                  const cookieMatch = document.cookie.match(/NEXT_LOCALE=([^;]+)/);
+                  const cookieValue = cookieMatch ? cookieMatch[1] : null;
+
+                  if (stored && LOCALES.includes(stored) && stored !== cookieValue) {
+                    const oneYear = 60 * 60 * 24 * 365;
+                    document.cookie = 'NEXT_LOCALE=' + stored + '; path=/; max-age=' + oneYear + '; SameSite=Lax';
+                  }
+
+                  // Save current URL locale to localStorage
+                  if (lang && LOCALES.includes(lang)) {
+                    localStorage.setItem('preferred_locale', lang);
+                  }
+                } catch (e) {}
               })();
             `,
           }}
