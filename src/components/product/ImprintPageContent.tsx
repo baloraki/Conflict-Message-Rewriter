@@ -1,8 +1,11 @@
-"use client";
-
 import { ObfuscatedEmail } from "@/components/ui/ObfuscatedEmail";
+import type { ImprintContactData } from "@/lib/imprint";
 
-export default function ImprintPageContent() {
+interface Props {
+  contact: ImprintContactData;
+}
+
+export default function ImprintPageContent({ contact }: Props) {
   return (
     <div className="max-w-2xl mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold text-zinc-100 mb-2">Imprint</h1>
@@ -10,28 +13,23 @@ export default function ImprintPageContent() {
         Legal disclosure pursuant to § 5 TMG / § 18 MStV
       </p>
 
-      {/* TODO: Replace all placeholder values below before deploying to production */}
       <div className="space-y-8 text-zinc-300 leading-relaxed">
         <section>
           <h2 className="text-xl font-semibold text-zinc-100 mb-3">Operator</h2>
-          {/* TODO: Replace with actual name and address */}
           <address className="not-italic text-zinc-300 space-y-1">
-            <p>[FIRST LAST]</p>
-            <p>[STREET NUMBER]</p>
-            <p>[POSTAL CODE CITY]</p>
-            <p>Germany</p>
+            <p>{contact.name}</p>
+            <p>{contact.street}</p>
+            <p>{contact.city}</p>
+            <p>{contact.country}</p>
           </address>
         </section>
 
         <section>
           <h2 className="text-xl font-semibold text-zinc-100 mb-3">Contact</h2>
-          {/* TODO: Replace the encoded value with:
-               node -e "console.log(Buffer.from('you@example.com').toString('base64'))"
-          */}
           <p>
             Email:{" "}
             <ObfuscatedEmail
-              encoded="W0RFSU5FQEVNQUJMLURF"
+              encoded={contact.emailEncoded}
               className="text-orange-400 hover:underline"
             />
           </p>
@@ -42,12 +40,11 @@ export default function ImprintPageContent() {
             Responsible for content
           </h2>
           <p>Responsible for content pursuant to § 18(2) MStV:</p>
-          {/* TODO: Replace with actual name and address */}
           <address className="not-italic mt-2 text-zinc-300 space-y-1">
-            <p>[FIRST LAST]</p>
-            <p>[STREET NUMBER]</p>
-            <p>[POSTAL CODE CITY]</p>
-            <p>Germany</p>
+            <p>{contact.name}</p>
+            <p>{contact.street}</p>
+            <p>{contact.city}</p>
+            <p>{contact.country}</p>
           </address>
         </section>
 
