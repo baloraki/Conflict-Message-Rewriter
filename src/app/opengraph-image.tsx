@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 
+export const dynamic = "force-dynamic";
 export const alt =
   "Burn After Chat — Vent anger, frustration and stress in a private fake chat. Write the message you should not send to your ex, boss, partner or family. Local-only, no account, no AI, deleted forever.";
 export const size = { width: 1200, height: 630 };
