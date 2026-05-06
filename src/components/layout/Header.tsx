@@ -52,20 +52,21 @@ export default function Header() {
           >
             Privacy
           </Link>
+        </nav>
+        <div className="flex items-center gap-2 flex-shrink-0">
           <ShareSheet
             size="sm"
             popoverPosition="below"
-            className="ml-1"
             title="Burn After Chat"
             text="Write the angry text, drunk reply, or 2 a.m. rant — then burn it. 🔥"
           />
-        </nav>
-        <Link href="/chat" className="flex-shrink-0">
-          <Button size="sm">
-            <span className="hidden sm:inline">Start a private dump</span>
-            <span className="sm:hidden">🔥 Start</span>
-          </Button>
-        </Link>
+          <Link href="/chat">
+            <Button size="sm">
+              <span className="hidden sm:inline">Start a private dump</span>
+              <span className="sm:hidden">🔥 Start</span>
+            </Button>
+          </Link>
+        </div>
       </div>
     </header>
   );

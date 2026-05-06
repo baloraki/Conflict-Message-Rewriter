@@ -139,7 +139,7 @@ export default function ShareSheet({
         aria-haspopup="dialog"
         aria-expanded={open}
         className={cn(
-          "inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-all duration-200",
+          "w-full inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-all duration-200",
           "bg-zinc-800 border border-zinc-700 text-zinc-300",
           "hover:bg-zinc-700 hover:border-zinc-500 hover:text-zinc-100",
           "focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-zinc-950",
@@ -160,7 +160,7 @@ export default function ShareSheet({
         aria-label="Share options"
         aria-modal="false"
         className={cn(
-          "absolute left-1/2 -translate-x-1/2 w-72 z-50",
+          "absolute left-1/2 -translate-x-1/2 w-72 max-w-[calc(100vw-2rem)] z-50",
           popoverPosition === "above" ? "bottom-full mb-3" : "top-full mt-3",
           "bg-zinc-900 border border-zinc-700 rounded-2xl shadow-2xl shadow-black/60 p-4",
           "transition-all duration-200 origin-bottom",
