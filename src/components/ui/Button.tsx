@@ -26,9 +26,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             "bg-red-900/40 text-red-300 hover:bg-red-900/60 border border-red-800 focus:ring-red-500",
           variant === "outline" &&
             "bg-transparent border border-zinc-700 text-zinc-300 hover:border-zinc-500 hover:text-zinc-100 focus:ring-zinc-500",
-          size === "sm" && "px-3 py-1.5 text-sm",
-          size === "md" && "px-5 py-2.5 text-base",
-          size === "lg" && "px-7 py-4 text-lg",
+          size === "sm" && "px-3 py-1.5 text-sm min-h-9",
+          size === "md" && "px-5 py-2.5 text-base min-h-11",
+          size === "lg" && "px-7 py-3.5 text-lg min-h-12",
           className
         )}
         {...props}

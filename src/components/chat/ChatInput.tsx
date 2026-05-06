@@ -41,7 +41,7 @@ export default function ChatInput({
   };
 
   return (
-    <div className="flex items-end gap-2 p-3 border-t border-zinc-800 bg-zinc-950">
+    <div className="flex items-end gap-2 px-3 pt-3 pb-3 border-t border-zinc-800 bg-zinc-950 pb-safe">
       <Textarea
         ref={textareaRef}
         value={value}
@@ -53,6 +53,9 @@ export default function ChatInput({
         disabled={disabled}
         className="min-h-[44px] max-h-[150px] py-3"
         aria-label="Message input"
+        autoCapitalize="sentences"
+        autoComplete="off"
+        spellCheck="true"
       />
       <Button
         onClick={handleSend}
@@ -60,7 +63,12 @@ export default function ChatInput({
         className="flex-shrink-0 h-11 w-11 p-0 rounded-xl"
         aria-label="Send message"
       >
-        <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+        <svg
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          className="w-5 h-5"
+          aria-hidden="true"
+        >
           <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
         </svg>
       </Button>
