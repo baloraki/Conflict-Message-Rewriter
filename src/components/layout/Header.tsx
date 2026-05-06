@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Button from "@/components/ui/Button";
+import ShareSheet from "@/components/ui/ShareSheet";
 import { cn } from "@/lib/utils";
 
 export default function Header() {
@@ -52,12 +53,20 @@ export default function Header() {
             Privacy
           </Link>
         </nav>
-        <Link href="/chat" className="flex-shrink-0">
-          <Button size="sm">
-            <span className="hidden sm:inline">Start a private dump</span>
-            <span className="sm:hidden">🔥 Start</span>
-          </Button>
-        </Link>
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <ShareSheet
+            size="sm"
+            popoverPosition="below"
+            title="Burn After Chat"
+            text="Write the angry text, drunk reply, or 2 a.m. rant — then burn it. 🔥"
+          />
+          <Link href="/chat">
+            <Button size="sm">
+              <span className="hidden sm:inline">Start a private dump</span>
+              <span className="sm:hidden">🔥 Start</span>
+            </Button>
+          </Link>
+        </div>
       </div>
     </header>
   );

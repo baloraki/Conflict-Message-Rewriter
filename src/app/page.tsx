@@ -4,6 +4,7 @@ import Script from "next/script";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
+import ShareSheet from "@/components/ui/ShareSheet";
 import FAQ from "@/components/product/FAQ";
 import DisclaimerBox from "@/components/product/DisclaimerBox";
 import {
@@ -198,6 +199,7 @@ export default function HomePage() {
                 How it works ↓
               </Button>
             </a>
+            <ShareSheet size="lg" className="w-full sm:w-auto" />
           </div>
           <p className="mt-6 text-xs text-zinc-600">
             No account. No server. No AI. Delete = gone.
