@@ -11,6 +11,8 @@ import SafetyBanner from "./SafetyBanner";
 import PrivacyPill from "@/components/product/PrivacyPill";
 import Button from "@/components/ui/Button";
 import { ChatMessage } from "@/lib/chat/types";
+import { getFakeReplyDelay } from "@/lib/chat/fakeReplyGenerator";
+import { generateGenAiReply } from "@/lib/chat/genaiReplyGenerator";
 import { generateId } from "@/lib/utils";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/types";
@@ -89,7 +91,7 @@ export default function FakeChat({
   }, [fakeReplies]);
 
   const handleSend = useCallback(
-    (text: string) => {
+    async (text: string) => {
       const userMessage: ChatMessage = {
         id: generateId(),
         text,
@@ -99,17 +101,19 @@ export default function FakeChat({
 
       setMessages((prev) => [...prev, userMessage]);
 
+      // Safety check — client-side only, no data leaves the browser
       if (containsSafetyKeyword(text)) {
         setShowSafetyBanner(true);
       }
 
-      const delay = Math.floor(Math.random() * 1800) + 1200;
+      const delay = getFakeReplyDelay();
       setIsTyping(true);
 
-      typingTimeoutRef.current = setTimeout(() => {
+      typingTimeoutRef.current = setTimeout(async () => {
+        const genAiReply = await generateGenAiReply(text);
         const replyMessage: ChatMessage = {
           id: generateId(),
-          text: getRandomFakeReply(),
+          text: genAiReply ?? getRandomFakeReply(),
           sender: "void",
           timestamp: new Date(),
         };

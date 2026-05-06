@@ -161,6 +161,8 @@ export interface Dictionary {
     namePlaceholder: string;
     email: string;
     emailPlaceholder: string;
+    subject: string;
+    subjectPlaceholder: string;
     message: string;
     messagePlaceholder: string;
     submit: string;

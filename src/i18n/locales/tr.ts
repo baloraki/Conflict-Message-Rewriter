@@ -314,6 +314,8 @@ export const dictionary: Dictionary = {
     namePlaceholder: "Adın",
     email: "E-posta",
     emailPlaceholder: "senin@e-posta.com",
+    subject: "Konu",
+    subjectPlaceholder: "Konusu nedir?",
     message: "Mesaj",
     messagePlaceholder: "Senin mesajın…",
     submit: "Mesaj gönder",

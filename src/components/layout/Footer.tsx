@@ -58,6 +58,12 @@ export default function Footer({ locale, translations }: FooterProps) {
             >
               {translations.links.contact}
             </Link>
+            <Link
+              href="/imprint"
+              className="hover:text-zinc-300 transition-colors"
+            >
+              Imprint
+            </Link>
           </div>
         </div>
         <div className="mt-8 pt-6 border-t border-zinc-800 text-xs text-zinc-600 leading-relaxed">

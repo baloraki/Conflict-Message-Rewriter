@@ -39,7 +39,7 @@ export default async function ContactPage({
         {dictionary.contactPage.title}
       </h1>
       <p className="text-zinc-400 mb-8">{dictionary.contactPage.intro}</p>
-      <ContactForm translations={dictionary.contactForm} />
+      <ContactForm translations={dictionary.contactForm} locale={locale} />
     </div>
   );
 }

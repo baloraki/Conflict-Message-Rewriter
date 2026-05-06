@@ -1,0 +1,13 @@
+import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo/buildMetadata";
+import ImprintPageContent from "@/components/product/ImprintPageContent";
+
+export const metadata: Metadata = buildMetadata({
+  title: "Imprint – Burn After Chat",
+  description: "Legal information and imprint for Burn After Chat.",
+  index: false,
+});
+
+export default function ImprintPage() {
+  return <ImprintPageContent />;
+}

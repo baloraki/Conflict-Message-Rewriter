@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Button from "@/components/ui/Button";
 import LanguageSwitcher from "@/components/layout/LanguageSwitcher";
+import ShareSheet from "@/components/ui/ShareSheet";
 import { cn } from "@/lib/utils";
 import { isLocale, DEFAULT_LOCALE } from "@/i18n/config";
 
@@ -77,7 +78,13 @@ export default function Header({ translations }: HeaderProps) {
             {translations.nav.privacy}
           </Link>
         </nav>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <ShareSheet
+            size="sm"
+            popoverPosition="below"
+            title="Burn After Chat"
+            text="Write the angry text, drunk reply, or 2 a.m. rant — then burn it. 🔥"
+          />
           <LanguageSwitcher />
           <Link href={chatHref} className="flex-shrink-0">
             <Button size="sm">

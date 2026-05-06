@@ -349,6 +349,8 @@ export const dictionary: Dictionary = {
     namePlaceholder: "Tu nombre",
     email: "Correo electrónico",
     emailPlaceholder: "tu@correo.com",
+    subject: "Asunto",
+    subjectPlaceholder: "¿De qué se trata?",
     message: "Mensaje",
     messagePlaceholder: "Tu mensaje…",
     submit: "Enviar mensaje",
