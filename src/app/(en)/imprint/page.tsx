@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo/buildMetadata";
 import ImprintPageContent from "@/components/product/ImprintPageContent";
+import { getImprintContactData } from "@/lib/imprint";
 
 export const metadata: Metadata = buildMetadata({
   title: "Imprint – Burn After Chat",
@@ -9,5 +10,6 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function ImprintPage() {
-  return <ImprintPageContent />;
+  const contact = getImprintContactData();
+  return <ImprintPageContent contact={contact} />;
 }

@@ -2,6 +2,7 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { isLocale } from "@/i18n/config";
 import type { Locale } from "@/i18n/config";
 import { ObfuscatedEmail } from "@/components/ui/ObfuscatedEmail";
+import { getImprintContactData } from "@/lib/imprint";
 
 export async function generateMetadata({
   params,
@@ -45,6 +46,7 @@ export default async function ImprintPage({
   const locale = lang as Locale;
   const dictionary = await getDictionary(locale);
   const { imprintPage } = dictionary;
+  const contact = getImprintContactData();
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-10">
@@ -64,17 +66,17 @@ export default async function ImprintPage({
             )}
             {section.address && (
               <address className="not-italic text-zinc-300 space-y-1 mt-2">
-                <p>{section.address.name}</p>
-                <p>{section.address.street}</p>
-                <p>{section.address.city}</p>
-                <p>{section.address.country}</p>
+                <p>{contact.name}</p>
+                <p>{contact.street}</p>
+                <p>{contact.city}</p>
+                <p>{contact.country}</p>
               </address>
             )}
             {section.emailLabel && (
               <p>
                 {section.emailLabel}{" "}
                 <ObfuscatedEmail
-                  encoded={imprintPage.emailEncoded}
+                  encoded={contact.emailEncoded}
                   className="text-orange-400 hover:underline"
                 />
               </p>
