@@ -20,8 +20,8 @@ export interface ImprintContactData {
  *   IMPRINT_EMAIL   – plain e-mail address (encoded to base64 at runtime)
  */
 export function getImprintContactData(): ImprintContactData {
-  const email = process.env.IMPRINT_EMAIL ?? "";
-  const emailEncoded = Buffer.from(email || FALLBACK).toString("base64");
+  const email = process.env.IMPRINT_EMAIL || FALLBACK;
+  const emailEncoded = Buffer.from(email).toString("base64");
 
   return {
     name: process.env.IMPRINT_NAME ?? FALLBACK,
