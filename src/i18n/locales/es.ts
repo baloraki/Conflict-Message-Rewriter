@@ -120,6 +120,11 @@ export const dictionary: Dictionary = {
       description:
         "Términos de uso de Burn After Chat. Herramienta gratuita, privada y anónima de desahogo para dejar salir la rabia y frustración. No es terapia, no es asesoramiento legal, no es apoyo en crisis — solo un espacio de escritura que se elimina a sí mismo.",
     },
+    imprint: {
+      title: "Aviso legal",
+      description:
+        "Aviso legal e información del responsable conforme al § 5 TMG (Ley Alemana de Telemedios) y al RGPD para Burn After Chat.",
+    },
   },
   layout: {
     skipToContent: "Ir al contenido",
@@ -140,6 +145,7 @@ export const dictionary: Dictionary = {
       terms: "Términos",
       disclaimer: "Aviso",
       contact: "Contacto",
+      imprint: "Aviso legal",
     },
     disclaimer:
       "Esta aplicación no es terapia, apoyo en crisis, asesoramiento legal, o mediación profesional. Si sientes que no estás seguro, amenazado, en riesgo de hacerte daño a ti mismo o a alguien más, o atrapado en abuso, contacta a los servicios de emergencia locales o a un profesional de confianza.",
@@ -361,39 +367,117 @@ export const dictionary: Dictionary = {
   },
   privacyPage: {
     title: "Política de Privacidad",
-    lastUpdated: "Última actualización: Mayo 2025",
+    lastUpdated: "Última actualización: Mayo 2026",
     sections: [
       {
         title: "La versión corta",
-        body: "Burn After Chat no recopila, almacena ni transmite tus mensajes de chat. Tus mensajes viven solo en la memoria del navegador mientras la página está abierta. Recargar o eliminar el chat los elimina completamente y permanentemente.",
+        body: "Burn After Chat no recopila, almacena ni transmite tus mensajes de chat. Tus mensajes viven solo en la memoria del navegador mientras la página está abierta. Recargar o eliminar el chat los elimina completa y permanentemente. Esta política te informa, conforme a los artículos 13 y 14 del RGPD, sobre cómo tratamos los datos personales.",
       },
       {
-        title: "Sin cuentas",
-        body: "No hay sistema de cuenta de usuario. No inicias sesión. No se recopila ni requiere información personal.",
+        title: "Responsable del tratamiento",
+        body: "El responsable del tratamiento de los datos personales en este sitio web es la persona indicada en el Aviso legal. Allí encontrarás los datos de contacto.",
+      },
+      {
+        title: "Sin cuentas, sin registro",
+        body: "No hay sistema de cuentas de usuario. No inicias sesión. No recopilamos nombres, direcciones de correo, fechas de nacimiento, números de teléfono ni identificadores personales similares para usar la app.",
       },
       {
         title: "Mensajes de chat",
-        body: "Los mensajes de chat se almacenan solo en el estado del componente React en tu navegador. Nunca se escriben en localStorage, sessionStorage, IndexedDB, cookies, parámetros de URL, ni en ningún servidor o base de datos. Desaparecen cuando eliminas el chat, recargas la página o cierras la pestaña.",
+        body: "Los mensajes del chat se mantienen solo de forma efímera en el estado del componente React en tu navegador. Nunca se escriben en localStorage, sessionStorage, IndexedDB, cookies, parámetros de URL, archivos de registro ni en ningún servidor o base de datos, y nunca se transmiten por la red. Desaparecen en cuanto eliminas el chat, recargas la página o cierras la pestaña.",
       },
       {
-        title: "Sin almacenamiento de mensajes de backend",
-        body: "La aplicación no tiene backend. Tus mensajes nunca se transmiten por internet. Ningún servidor los recibe ni los procesa.",
+        title: "Sin almacenamiento en backend",
+        body: "La app principal (chat) no tiene backend propio. Tus mensajes nunca se transmiten por internet. Ningún servidor los recibe ni los procesa.",
       },
       {
         title: "Sin API de IA",
-        body: "La aplicación no usa ninguna API de IA o aprendizaje automático. Las respuestas falsas se generan a partir de una lista local predefinida. Nada de lo que escribas se analiza, clasifica o procesa por un servicio externo.",
+        body: "La app no usa ninguna API de IA ni de aprendizaje automático. Las respuestas falsas se generan desde una lista local predefinida que se entrega con la página. Nada de lo que escribas se analiza, clasifica o procesa por un servicio externo.",
       },
       {
-        title: "Análisis y rastreo",
-        body: "No se incluyen scripts de análisis o rastreo por defecto. La aplicación está diseñada para ser lo más privada posible.",
+        title: "Hosting y registros del servidor",
+        body: "Este sitio está alojado por Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, EE. UU. Al cargar la página, Vercel procesa como encargado del tratamiento datos técnicos de conexión (dirección IP, fecha/hora, user agent, URL solicitada). Base jurídica: art. 6.1.f RGPD (interés legítimo en una prestación estable y segura). Las direcciones IP no se vinculan permanentemente a tu identidad. Hemos firmado un acuerdo de encargo del tratamiento con Vercel, incluidas las Cláusulas Contractuales Tipo (SCC) de la UE. Política: https://vercel.com/legal/privacy-policy.",
       },
       {
-        title: "Preferencias locales",
-        body: "La aplicación puede usar localStorage para almacenar preferencias no sensibles como tu idioma seleccionado o si has visto la introducción. Estos datos no dejan tu dispositivo.",
+        title: "Análisis con Simple Analytics",
+        body: "Usamos Simple Analytics (Simple Analytics B.V., Países Bajos, https://www.simpleanalytics.com) para una medición de audiencia respetuosa con la privacidad. Simple Analytics no usa cookies, no crea perfiles entre sitios y no transfiere datos fuera de la UE/EEE. Se recopilan únicamente estadísticas anónimas y agregadas (páginas vistas, referente, país aproximado a partir de una IP truncada, clase de navegador/dispositivo). Las direcciones IP solo se procesan brevemente en memoria y no se almacenan. Base jurídica: art. 6.1.f RGPD (interés legítimo en analítica sin cookies y minimizadora de datos para mejorar el servicio). Como no se accede a información del dispositivo en el sentido del art. 5.3 ePrivacy / § 25 TDDDG, no se requiere consentimiento. Detalles: https://docs.simpleanalytics.com/what-we-collect.",
+      },
+      {
+        title: "Vercel Analytics y Speed Insights",
+        body: "Adicionalmente usamos Vercel Web Analytics y Vercel Speed Insights (Vercel Inc., EE. UU.) para medir de forma anónima visitas y métricas de rendimiento (Core Web Vitals). Vercel Analytics es sin cookies y no crea perfiles de usuario; las direcciones IP se usan solo para calcular un hash diario, salado y anónimo de visitante, y no se almacenan. Base jurídica: art. 6.1.f RGPD. Como Vercel trata datos en EE. UU., las transferencias se basan en las Cláusulas Contractuales Tipo de la UE y, adicionalmente, en el EU-US Data Privacy Framework. Detalles: https://vercel.com/docs/analytics/privacy-policy.",
+      },
+      {
+        title: "Preferencias locales (localStorage)",
+        body: "La app guarda en el localStorage de tu navegador preferencias técnicamente necesarias y no sensibles, por ejemplo el idioma seleccionado (preferred_locale) y si ya has visto la introducción. Se establece además una cookie 'NEXT_LOCALE' para que el servidor respete tu elección de idioma. Este almacenamiento es admisible sin consentimiento porque es estrictamente necesario para un servicio solicitado por ti (selección de idioma). Los datos no salen de tu dispositivo y no se comparten con terceros.",
       },
       {
         title: "Formulario de contacto",
-        body: "Si usas el formulario de contacto, tu mensaje se envía a un servicio de formulario de terceros (Web3Forms). Solo lo que escribas en el formulario se transmite. Consulta la política de privacidad de Web3Forms para cómo manejan los envíos de formularios.",
+        body: "Si usas el formulario de contacto, tu mensaje se entrega mediante Web3Forms (10Web Inc., EE. UU.). Se procesan los datos que introduzcas (nombre, correo, asunto, mensaje). Base jurídica: art. 6.1.b RGPD (atender tu consulta) o art. 6.1.f RGPD (interés legítimo en una comunicación eficiente). Existe relación de encargo con Web3Forms; las transferencias a EE. UU. se garantizan mediante las Cláusulas Contractuales Tipo de la UE. Conservamos las consultas solo el tiempo necesario para tramitarlas. Política: https://web3forms.com/privacy.",
+      },
+      {
+        title: "Destinatarios y transferencias internacionales",
+        body: "Los datos personales solo se comparten con los encargados mencionados (Vercel, Simple Analytics, Web3Forms). Las transferencias a EE. UU. se basan en las Cláusulas Contractuales Tipo (SCC) de la UE y, además, en el EU-US Data Privacy Framework. No vendemos datos personales ni hacemos profiling. No existe decisión automatizada en el sentido del art. 22 RGPD.",
+      },
+      {
+        title: "Plazos de conservación",
+        body: "El contenido del chat no se almacena. Las estadísticas de audiencia se conservan solo de forma agregada y anónima. Los registros del servidor se conservan brevemente por el proveedor para garantizar la operación y la seguridad. Las consultas del formulario se eliminan cuando ya no son necesarias, como máximo a los 12 meses, salvo obligaciones legales de conservación.",
+      },
+      {
+        title: "Tus derechos",
+        body: "Conforme al RGPD tienes derecho de acceso (art. 15), rectificación (art. 16), supresión (art. 17), limitación del tratamiento (art. 18), portabilidad (art. 20) y oposición a tratamientos basados en el art. 6.1.f (art. 21). Para ejercerlos, dirígete a la dirección indicada en el Aviso legal. También tienes derecho a presentar una reclamación ante una autoridad de control en virtud del art. 77 RGPD (en España, la Agencia Española de Protección de Datos, www.aepd.es).",
+      },
+      {
+        title: "Cambios en esta política",
+        body: "Actualizamos esta política cuando cambian los servicios o la legislación aplicable. Aplica la versión publicada aquí con la fecha indicada arriba.",
+      },
+    ],
+  },
+  imprintPage: {
+    title: "Aviso legal",
+    subtitle: "Información conforme al § 5 TMG / § 18 MStV",
+    emailEncoded: "W0RFSU5FQEVNQUJMLURF",
+    sections: [
+      {
+        title: "Operador",
+        address: {
+          name: "[NOMBRE APELLIDO]",
+          street: "[CALLE NÚMERO]",
+          city: "[CÓDIGO POSTAL CIUDAD]",
+          country: "Alemania",
+        },
+      },
+      {
+        title: "Contacto",
+        emailLabel: "Correo:",
+      },
+      {
+        title: "Responsable de los contenidos",
+        body: "Responsable de los contenidos según el § 18(2) MStV:",
+        address: {
+          name: "[NOMBRE APELLIDO]",
+          street: "[CALLE NÚMERO]",
+          city: "[CÓDIGO POSTAL CIUDAD]",
+          country: "Alemania",
+        },
+      },
+      {
+        title: "IVA / régimen de pequeño empresario",
+        body: "Si procede, aquí debe indicarse el número de identificación fiscal a efectos del IVA conforme al § 27a UStG. Los pequeños empresarios conforme al § 19 UStG no repercuten el IVA.",
+      },
+      {
+        title: "Resolución de litigios en línea (UE)",
+        body: "La Comisión Europea ofrece una plataforma de resolución de litigios en línea: https://ec.europa.eu/consumers/odr. Nuestra dirección de correo aparece arriba. No estamos dispuestos ni obligados a participar en procedimientos de resolución de litigios ante un órgano de arbitraje de consumo.",
+      },
+      {
+        title: "Responsabilidad por los contenidos",
+        body: "Como prestador de servicios somos responsables de los contenidos propios de estas páginas conforme al § 7(1) TMG y a la legislación general. Conforme a los §§ 8 a 10 TMG no estamos obligados a supervisar la información transmitida o almacenada por terceros ni a investigar circunstancias que indiquen una actividad ilícita. Las obligaciones de retirar o bloquear el uso de información conforme a la legislación general permanecen inalteradas.",
+      },
+      {
+        title: "Responsabilidad por los enlaces",
+        body: "Nuestra oferta contiene enlaces a sitios web externos de terceros sobre cuyo contenido no tenemos influencia. Por ello no podemos asumir responsabilidad por dichos contenidos. El proveedor u operador de las páginas enlazadas es siempre responsable de su contenido. Si tenemos conocimiento de infracciones legales, retiraremos los enlaces de inmediato.",
+      },
+      {
+        title: "Derechos de autor",
+        body: "Los contenidos y obras creados por el operador del sitio en estas páginas están sujetos al derecho de autor alemán. Las contribuciones de terceros se identifican como tales. La reproducción, edición, distribución y cualquier tipo de explotación fuera de los límites del derecho de autor requieren el consentimiento por escrito del autor o creador correspondiente.",
       },
     ],
   },

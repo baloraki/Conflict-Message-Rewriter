@@ -94,6 +94,11 @@ export const dictionary: Dictionary = {
       description:
         "Nutzungsbedingungen für Burn After Chat. Kostenloses, privates, anonymes Tool, um Wut und Frust loszuwerden. Keine Therapie, keine Rechtsberatung, keine Krisenhilfe — nur ein Schreibraum, der sich selbst löscht.",
     },
+    imprint: {
+      title: "Impressum",
+      description:
+        "Impressum und Anbieterkennzeichnung gemäß § 5 TMG für Burn After Chat. Verantwortlicher Anbieter, Kontakt und inhaltlich Verantwortlicher.",
+    },
   },
   layout: {
     skipToContent: "Zum Inhalt springen",
@@ -114,6 +119,7 @@ export const dictionary: Dictionary = {
       terms: "AGB",
       disclaimer: "Hinweis",
       contact: "Kontakt",
+      imprint: "Impressum",
     },
     disclaimer:
       "Diese App ist keine Therapie, keine Krisenhilfe, keine Rechtsberatung und keine professionelle Mediation. Wenn du dich unsicher, bedroht, in Gefahr fühlst — dich oder andere zu verletzen — oder in einem Missbrauch festsitzt, kontaktiere lokale Notdienste oder eine vertrauenswürdige Fachperson.",
@@ -334,40 +340,118 @@ export const dictionary: Dictionary = {
     notConfigured: "Kontaktformular ist noch nicht konfiguriert.",
   },
   privacyPage: {
-    title: "Datenschutz",
-    lastUpdated: "Zuletzt aktualisiert: Mai 2025",
+    title: "Datenschutzerklärung",
+    lastUpdated: "Zuletzt aktualisiert: Mai 2026",
     sections: [
       {
         title: "Die Kurzfassung",
-        body: "Burn After Chat erhebt, speichert oder überträgt deine Chat-Nachrichten nicht. Deine Nachrichten leben nur im Speicher deines Browsers, solange die Seite offen ist. Beim Neuladen oder Löschen sind sie vollständig und dauerhaft weg.",
+        body: "Burn After Chat erhebt, speichert oder überträgt deine Chat-Nachrichten nicht. Deine Nachrichten leben ausschließlich im Speicher deines Browsers, solange die Seite geöffnet ist. Beim Neuladen oder Löschen sind sie vollständig und dauerhaft weg. Diese Datenschutzerklärung informiert dich gemäß Art. 13 und 14 DSGVO über die Verarbeitung personenbezogener Daten.",
       },
       {
-        title: "Keine Konten",
-        body: "Es gibt kein Nutzerkonto-System. Du loggst dich nicht ein. Keine persönlichen Informationen werden erhoben oder verlangt.",
+        title: "Verantwortlicher im Sinne der DSGVO",
+        body: "Verantwortlich für die Datenverarbeitung auf dieser Website ist der im Impressum genannte Anbieter. Kontaktmöglichkeiten findest du auf der Impressum-Seite.",
+      },
+      {
+        title: "Keine Konten, keine Registrierung",
+        body: "Es gibt kein Nutzerkonto-System. Du loggst dich nicht ein. Es werden keine Namen, E-Mail-Adressen, Geburtsdaten, Telefonnummern oder vergleichbare personenbezogene Identifikationsdaten erhoben oder verlangt, um die App zu nutzen.",
       },
       {
         title: "Chat-Nachrichten",
-        body: "Chat-Nachrichten werden nur im React-Komponenten-State deines Browsers gehalten. Sie werden nie in localStorage, sessionStorage, IndexedDB, Cookies, URL-Parametern oder einer Datenbank gespeichert. Sie verschwinden, wenn du den Chat löschst, die Seite neu lädst oder den Tab schließt.",
+        body: "Chat-Nachrichten werden ausschließlich flüchtig im React-Komponenten-State deines Browsers gehalten. Sie werden nie in localStorage, sessionStorage, IndexedDB, Cookies, URL-Parametern, Logdateien oder einer Datenbank gespeichert und nie an einen Server übertragen. Sie verschwinden, sobald du den Chat löschst, die Seite neu lädst oder den Tab schließt.",
       },
       {
         title: "Keine Backend-Speicherung",
-        body: "Die App hat kein Backend. Deine Nachrichten werden nie über das Internet übertragen. Kein Server empfängt oder verarbeitet sie.",
+        body: "Die Kern-App (Chat) hat kein eigenes Backend. Deine Nachrichten werden nie über das Internet übertragen. Kein Server empfängt oder verarbeitet sie.",
       },
       {
         title: "Keine KI-APIs",
-        body: "Die App nutzt keine KI- oder Machine-Learning-APIs. Fake-Antworten kommen aus einer lokalen, fest definierten Liste. Nichts, was du tippst, wird analysiert, klassifiziert oder durch einen externen Dienst verarbeitet.",
+        body: "Die App nutzt keine KI- oder Machine-Learning-APIs. Fake-Antworten kommen aus einer lokalen, fest im Quelltext hinterlegten Liste. Nichts, was du tippst, wird analysiert, klassifiziert oder durch einen externen Dienst verarbeitet.",
       },
       {
-        title: "Analyse und Tracking",
-        body: "Standardmäßig sind keine Analyse- oder Tracking-Skripte enthalten. Die App ist so privat wie möglich gestaltet.",
+        title: "Server-Logs (Hosting)",
+        body: "Diese Website wird bei Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA gehostet. Beim Aufruf der Seite verarbeitet Vercel als Auftragsverarbeiter technisch notwendige Verbindungsdaten (u. a. IP-Adresse, Datum/Uhrzeit, User-Agent, angefragte URL). Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer stabilen, sicheren Bereitstellung der Website). IP-Adressen werden nicht dauerhaft mit deiner Person verknüpft. Mit Vercel besteht ein Auftragsverarbeitungsvertrag inkl. EU-Standardvertragsklauseln. Datenschutzerklärung: https://vercel.com/legal/privacy-policy.",
       },
       {
-        title: "Lokale Einstellungen",
-        body: "Die App kann localStorage nutzen, um nicht-sensible Einstellungen wie deine gewählte Sprache zu speichern. Diese Daten verlassen dein Gerät nicht.",
+        title: "Reichweitenmessung mit Simple Analytics",
+        body: "Wir nutzen Simple Analytics (Simple Analytics B.V., Niederlande, https://www.simpleanalytics.com) zur datenschutzfreundlichen Reichweitenmessung. Simple Analytics setzt keine Cookies, erstellt keine geräteübergreifenden Profile und überträgt keine Daten in Drittländer außerhalb der EU/des EWR. Erhoben werden anonymisierte, aggregierte Statistiken (z. B. Seitenaufrufe, Referrer, ungefähres Land aus der gekürzten IP-Adresse, Browser- und Geräte-Klasse). IP-Adressen werden nur kurzzeitig im Speicher verarbeitet und nicht gespeichert. Es entstehen keine personenbezogenen Profile. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer cookiefreien, datensparsamen Reichweitenanalyse zur Verbesserung des Angebots). Da kein Zugriff auf Endgeräte-Informationen i. S. v. § 25 TDDDG erfolgt, ist keine Einwilligung erforderlich. Mehr Infos: https://docs.simpleanalytics.com/what-we-collect.",
+      },
+      {
+        title: "Vercel Analytics & Speed Insights",
+        body: "Zusätzlich nutzen wir Vercel Web Analytics und Vercel Speed Insights (Vercel Inc., USA) zur anonymen Messung von Seitenaufrufen und Performance-Kennzahlen (Core Web Vitals). Vercel Analytics arbeitet cookielos und verzichtet auf den Aufbau von Nutzerprofilen; IP-Adressen werden nur zur Berechnung eines täglichen, salt-basierten anonymen Besucher-Hashes verwendet und nicht gespeichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Da Vercel mit Sitz in den USA verarbeitet, schließen wir die EU-Standardvertragsklauseln ab und stützen uns zusätzlich auf das EU-US Data Privacy Framework. Details: https://vercel.com/docs/analytics/privacy-policy.",
+      },
+      {
+        title: "Lokale Einstellungen (localStorage)",
+        body: "Die App speichert technisch notwendige, nicht-sensible Einstellungen im localStorage deines Browsers — z. B. die gewählte Sprache (preferred_locale) und ggf. einen Hinweis, ob du das Intro gesehen hast. Es wird zudem ein Cookie 'NEXT_LOCALE' gesetzt, um deine Sprachwahl serverseitig zu erkennen. Diese Speicherung ist nach § 25 Abs. 2 Nr. 2 TDDDG einwilligungsfrei zulässig, da sie für den ausdrücklich vom Nutzer gewünschten Dienst (Sprachauswahl) zwingend erforderlich ist. Die Daten verlassen dein Gerät nicht und werden nicht an Dritte weitergegeben.",
       },
       {
         title: "Kontaktformular",
-        body: "Wenn du das Kontaktformular nutzt, wird deine Nachricht an einen Drittanbieter (Web3Forms) übermittelt. Nur was du im Formular eingibst, wird übertragen. Beachte die Datenschutzerklärung von Web3Forms.",
+        body: "Wenn du das Kontaktformular nutzt, wird deine Nachricht über den Dienstleister Web3Forms (10Web Inc., USA) zugestellt. Verarbeitet werden die von dir eingegebenen Daten (Name, E-Mail, Betreff, Nachricht). Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Anbahnung/Beantwortung deiner Anfrage) bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an effizienter Kommunikation). Mit Web3Forms besteht ein Auftragsverarbeitungsverhältnis; die Übermittlung in die USA wird durch EU-Standardvertragsklauseln abgesichert. Wir speichern Anfragen nur so lange, wie zur Bearbeitung erforderlich. Datenschutzerklärung von Web3Forms: https://web3forms.com/privacy.",
+      },
+      {
+        title: "Empfänger und Drittlandübermittlung",
+        body: "Eine Übermittlung deiner Daten an Drittanbieter erfolgt nur an die genannten Auftragsverarbeiter (Vercel, Simple Analytics, Web3Forms). Soweit Daten in die USA übermittelt werden, ist dies durch EU-Standardvertragsklauseln (SCC) und ergänzend durch das EU-US Data Privacy Framework abgesichert. Es findet kein Verkauf personenbezogener Daten und kein Profiling statt. Eine automatisierte Entscheidungsfindung im Sinne von Art. 22 DSGVO erfolgt nicht.",
+      },
+      {
+        title: "Speicherdauer",
+        body: "Chat-Inhalte werden nicht gespeichert. Reichweitenstatistiken werden in aggregierter, anonymisierter Form gespeichert. Server-Logs werden vom Hoster nur kurzzeitig zur Sicherstellung des Betriebs und zur Abwehr von Angriffen vorgehalten. Anfragen über das Kontaktformular werden gelöscht, sobald sie nicht mehr benötigt werden, spätestens nach 12 Monaten — sofern keine gesetzlichen Aufbewahrungspflichten entgegenstehen.",
+      },
+      {
+        title: "Deine Rechte als betroffene Person",
+        body: "Du hast nach DSGVO jederzeit das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) sowie ein Widerspruchsrecht gegen Verarbeitungen, die auf Art. 6 Abs. 1 lit. f DSGVO beruhen (Art. 21). Wende dich dafür an die im Impressum genannte Kontaktadresse. Außerdem hast du nach Art. 77 DSGVO das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren — z. B. der für deinen Wohnsitz zuständigen Landesdatenschutzbehörde.",
+      },
+      {
+        title: "Änderungen dieser Datenschutzerklärung",
+        body: "Wir passen diese Datenschutzerklärung an, wenn sich die Rechtslage oder die genutzten Dienste ändern. Es gilt jeweils die hier veröffentlichte Fassung mit dem oben angegebenen Stand.",
+      },
+    ],
+  },
+  imprintPage: {
+    title: "Impressum",
+    subtitle: "Angaben gemäß § 5 TMG / § 18 MStV",
+    emailEncoded: "W0RFSU5FQEVNQUJMLURF",
+    sections: [
+      {
+        title: "Anbieter",
+        address: {
+          name: "[VORNAME NACHNAME]",
+          street: "[STRASSE HAUSNR]",
+          city: "[PLZ ORT]",
+          country: "Deutschland",
+        },
+      },
+      {
+        title: "Kontakt",
+        emailLabel: "E-Mail:",
+      },
+      {
+        title: "Verantwortlich für den Inhalt",
+        body: "Inhaltlich verantwortlich gemäß § 18 Abs. 2 MStV:",
+        address: {
+          name: "[VORNAME NACHNAME]",
+          street: "[STRASSE HAUSNR]",
+          city: "[PLZ ORT]",
+          country: "Deutschland",
+        },
+      },
+      {
+        title: "Umsatzsteuer / Kleinunternehmerregelung",
+        body: "Hinweis: Falls zutreffend, ist hier die Umsatzsteuer-Identifikationsnummer gemäß § 27 a UStG einzutragen. Bei Kleinunternehmern gemäß § 19 UStG wird keine Umsatzsteuer ausgewiesen.",
+      },
+      {
+        title: "EU-Streitschlichtung",
+        body: "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr. Unsere E-Mail-Adresse findest du oben. Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.",
+      },
+      {
+        title: "Haftung für Inhalte",
+        body: "Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt.",
+      },
+      {
+        title: "Haftung für Links",
+        body: "Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.",
+      },
+      {
+        title: "Urheberrecht",
+        body: "Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet. Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.",
       },
     ],
   },

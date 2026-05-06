@@ -42,6 +42,27 @@ export type CalmTemplatesByKey = Record<
   { label: string; templates: string[] }
 >;
 
+export interface ImprintAddressBlock {
+  name: string;
+  street: string;
+  city: string;
+  country: string;
+}
+
+export interface ImprintSection {
+  title: string;
+  body?: string;
+  address?: ImprintAddressBlock;
+  emailLabel?: string;
+}
+
+export interface ImprintPage {
+  title: string;
+  subtitle: string;
+  emailEncoded: string;
+  sections: ImprintSection[];
+}
+
 export interface Dictionary {
   meta: {
     home: PageMeta;
@@ -52,6 +73,7 @@ export interface Dictionary {
     disclaimer: PageMeta;
     privacy: PageMeta;
     terms: PageMeta;
+    imprint: PageMeta;
     titleTemplate: string;
     siteName: string;
     keywords: string[];
@@ -77,6 +99,7 @@ export interface Dictionary {
       terms: string;
       disclaimer: string;
       contact: string;
+      imprint: string;
     };
     disclaimer: string;
   };
@@ -176,6 +199,7 @@ export interface Dictionary {
     lastUpdated: string;
     sections: SimpleSection[];
   };
+  imprintPage: ImprintPage;
   termsPage: {
     title: string;
     lastUpdated: string;

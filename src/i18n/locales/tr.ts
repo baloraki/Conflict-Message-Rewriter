@@ -85,6 +85,11 @@ export const dictionary: Dictionary = {
       description:
         "Burn After Chat için kullanım şartları. Öfke ve hayal kırıklığını ifade etmek için ücretsiz, özel, anonim araç. Terapist değil, hukuki tavsiye değil, kriz desteği değil — sadece kendini silen bir yazı alanı.",
     },
+    imprint: {
+      title: "Künye",
+      description:
+        "Burn After Chat için § 5 TMG (Alman Telemedya Yasası) uyarınca yasal künye ve sorumlu sağlayıcı bilgileri.",
+    },
   },
   layout: {
     skipToContent: "İçeriğe atla",
@@ -105,6 +110,7 @@ export const dictionary: Dictionary = {
       terms: "Şartlar",
       disclaimer: "Uyarı",
       contact: "İletişim",
+      imprint: "Künye",
     },
     disclaimer:
       "Bu uygulama terapist, kriz desteği, hukuki tavsiye veya profesyonel arabulucu değildir. Kendini güvensiz, tehdit edilmiş, zarara uğrama riski altında ya da istismar içinde sıkışmış hissedersen, yerel acil hizmetleri veya güvenilir bir profesyoneli ara.",
@@ -326,39 +332,117 @@ export const dictionary: Dictionary = {
   },
   privacyPage: {
     title: "Gizlilik Politikası",
-    lastUpdated: "Son güncelleme: Mayıs 2025",
+    lastUpdated: "Son güncelleme: Mayıs 2026",
     sections: [
       {
         title: "Kısaca",
-        body: "Burn After Chat sohbet mesajlarınızı toplama, depolanmadı ya da iletmez. Mesajlarınız sayfa açıkken yalnızca tarayıcı belleğinde yaşar. Yeniden yükleme ya da silme sırasında tamamen ve kalıcı olarak kaybolur.",
+        body: "Burn After Chat sohbet mesajlarını toplamaz, saklamaz ve iletmez. Mesajların yalnızca sayfa açıkken tarayıcı belleğinde bulunur. Sayfayı yenilediğinde veya sohbeti sildiğinde tamamen ve kalıcı olarak kaybolurlar. Bu politika, GDPR'ın 13. ve 14. maddeleri ile KVKK'nın 10. maddesi uyarınca kişisel veri işleme hakkında seni bilgilendirir.",
       },
       {
-        title: "Hesap yok",
-        body: "Kullanıcı hesabı sistemi yok. Giriş yapmıyorsunuz. Kişisel bilgi toplama ya da talep yok.",
+        title: "Veri sorumlusu",
+        body: "Bu web sitesindeki kişisel verilerin işlenmesinden sorumlu olan, Künye sayfasında belirtilen sağlayıcıdır. İletişim bilgilerini Künye sayfasında bulabilirsin.",
+      },
+      {
+        title: "Hesap yok, kayıt yok",
+        body: "Kullanıcı hesabı sistemi yoktur. Giriş yapmazsın. Uygulamayı kullanmak için ad, e-posta, doğum tarihi, telefon numarası veya benzeri kişisel kimlik bilgileri toplanmaz.",
       },
       {
         title: "Sohbet mesajları",
-        body: "Sohbet mesajları yalnızca tarayıcıda React bileşeni durumunda depolanır. localStorage, sessionStorage, IndexedDB, çerezleri, URL parametreleri ya da herhangi bir sunucu ya da veritabanına yazılmazlar. Sohbeti silindiğinde, sayfayı yeniden yükleyerek ya da sekmeyi kapatmada kaybolurlar.",
+        body: "Sohbet mesajları yalnızca tarayıcındaki React bileşen durumunda geçici olarak tutulur. localStorage, sessionStorage, IndexedDB, çerezler, URL parametreleri, log dosyaları, sunucular veya veritabanlarına asla yazılmaz ve ağ üzerinden iletilmez. Sohbeti silmen, sayfayı yeniden yüklemen veya sekmeyi kapatman ile birlikte kaybolurlar.",
       },
       {
         title: "Arka uç mesaj depolama yok",
-        body: "Uygulamanın arka ucu yok. Mesajlarınız asla internet üzerinden iletilmez. Hiçbir sunucu almaz ya da işlemez.",
+        body: "Çekirdek uygulamanın (sohbetin) kendine ait bir arka ucu yoktur. Mesajların internete asla iletilmez. Hiçbir sunucu bunları almaz veya işlemez.",
       },
       {
         title: "Yapay zeka API'leri yok",
-        body: "Uygulama herhangi bir yapay zeka ya da makine öğrenmesi API'si kullanmaz. Sahte cevaplar yerel bir önceden tanımlanmış listeden oluşturulur. Yazdiğin hiçbir şey analiz, sınıflandırılmadı ya da harici bir hizmet tarafından işlenmez.",
+        body: "Uygulama herhangi bir yapay zeka veya makine öğrenmesi API'si kullanmaz. Sahte yanıtlar, sayfayla birlikte gönderilen yerel ve önceden tanımlı bir listeden gelir. Yazdığın hiçbir şey analiz edilmez, sınıflandırılmaz veya harici bir hizmet tarafından işlenmez.",
       },
       {
-        title: "Analitik ve izleme",
-        body: "Varsayılan olarak analitik ya da izleme betiği dahil edilmez. Uygulama mümkün olduğunca özel olacak şekilde tasarlanmıştır.",
+        title: "Hosting ve sunucu kayıtları",
+        body: "Bu site Vercel Inc. tarafından barındırılmaktadır (340 S Lemon Ave #4133, Walnut, CA 91789, ABD). Sayfayı yüklediğinde Vercel, veri işleyen sıfatıyla teknik olarak gerekli bağlantı verilerini (IP adresi, tarih/saat, user agent, istenen URL) işler. Hukuki dayanak: GDPR md. 6/1-f (sitenin güvenli ve istikrarlı sunulması için meşru menfaat). IP adresleri kimliğine kalıcı olarak bağlanmaz. Vercel ile AB Standart Sözleşme Hükümleri içeren bir veri işleme sözleşmesi imzaladık. Politika: https://vercel.com/legal/privacy-policy.",
       },
       {
-        title: "Yerel tercihler",
-        body: "Uygulama seçilen dilini ya da başlangıcı görüp görmediğini depolamak için localStorage'ı kullanabilir. Bu veriler cihazını terk etmez.",
+        title: "Simple Analytics ile analitik",
+        body: "Gizlilik dostu trafik ölçümü için Simple Analytics (Simple Analytics B.V., Hollanda, https://www.simpleanalytics.com) kullanıyoruz. Simple Analytics çerez kullanmaz, siteler arası profiller oluşturmaz ve verileri AB/AEA dışına aktarmaz. Yalnızca anonim ve toplu istatistikler toplanır (sayfa görüntülemeleri, yönlendiren site, kısaltılmış IP üzerinden yaklaşık ülke, tarayıcı/cihaz sınıfı). IP adresleri yalnızca kısa süreyle bellekte işlenir, saklanmaz. Hukuki dayanak: GDPR md. 6/1-f (çerezsiz, veri minimizasyonuna dayalı analitikte meşru menfaat). Cihaz üzerinde bilgi okunmadığı/yazılmadığı için ePrivacy / § 25 TDDDG kapsamında onay gerekmez. Detaylar: https://docs.simpleanalytics.com/what-we-collect.",
+      },
+      {
+        title: "Vercel Analytics ve Speed Insights",
+        body: "Ek olarak sayfa görüntülemelerini ve performans metriklerini (Core Web Vitals) anonim ölçmek için Vercel Web Analytics ve Vercel Speed Insights (Vercel Inc., ABD) kullanıyoruz. Vercel Analytics çerezsizdir ve kullanıcı profili oluşturmaz; IP adresleri yalnızca günlük, salt-eklenmiş, anonim ziyaretçi hash'i hesaplamak için kullanılır ve saklanmaz. Hukuki dayanak: GDPR md. 6/1-f. Vercel ABD'de işleme yaptığı için aktarımlar AB Standart Sözleşme Hükümlerine ve ek olarak EU-US Data Privacy Framework'e dayanır. Detaylar: https://vercel.com/docs/analytics/privacy-policy.",
+      },
+      {
+        title: "Yerel tercihler (localStorage)",
+        body: "Uygulama tarayıcının localStorage alanında teknik olarak gerekli, hassas olmayan tercihleri saklar — örneğin seçtiğin dil (preferred_locale) ve girişi gördüğüne dair bir bayrak. Sunucunun dil tercihini sonraki isteklerde dikkate alabilmesi için 'NEXT_LOCALE' adlı bir çerez de ayarlanır. Bu saklama, açıkça talep ettiğin bir hizmet (dil seçimi) için kesinlikle gerekli olduğundan onaysız izinlidir. Veriler cihazından çıkmaz ve üçüncü taraflarla paylaşılmaz.",
       },
       {
         title: "İletişim formu",
-        body: "İletişim formunu kullanırsan, mesajın üçüncü taraf hizmetine (Web3Forms) gönderilir. Sadece formda yazdiğin şey iletilir. Web3Forms gizlilik politikasında form gönderilerini nasıl işlediklerine bakın.",
+        body: "İletişim formunu kullanırsan, mesajın Web3Forms (10Web Inc., ABD) aracılığıyla iletilir. Girdiğin veriler (ad, e-posta, konu, mesaj) bu amaçla işlenir. Hukuki dayanak: GDPR md. 6/1-b (talebinin yürütülmesi) veya md. 6/1-f (etkili iletişimde meşru menfaat). Web3Forms ile veri işleyen ilişkimiz vardır; ABD'ye aktarımlar AB Standart Sözleşme Hükümleri ile güvence altına alınır. Talepleri yalnızca işlemek için gerekli olduğu süre boyunca saklarız. Politika: https://web3forms.com/privacy.",
+      },
+      {
+        title: "Alıcılar ve uluslararası aktarımlar",
+        body: "Kişisel veriler yalnızca yukarıda belirtilen veri işleyenlerle paylaşılır (Vercel, Simple Analytics, Web3Forms). ABD'ye aktarımlar AB Standart Sözleşme Hükümleri (SCC) ve EU-US Data Privacy Framework ile güvence altına alınır. Kişisel verileri satmıyoruz ve profil çıkarmıyoruz. GDPR md. 22 kapsamında otomatik karar verme yapılmaz.",
+      },
+      {
+        title: "Saklama süreleri",
+        body: "Sohbet içeriği saklanmaz. Analitik veriler yalnızca toplu ve anonim biçimde saklanır. Sunucu kayıtları, hizmetin işletilmesi ve güvenliğin sağlanması için barındırma sağlayıcı tarafından kısa süreli saklanır. İletişim formu talepleri, gerekli olmadığında, en geç 12 ay sonra silinir — yasal saklama yükümlülükleri saklı kalmak kaydıyla.",
+      },
+      {
+        title: "Haklarınız",
+        body: "GDPR ve KVKK kapsamında erişim, düzeltme, silme, işlemenin sınırlanması, veri taşınabilirliği ve meşru menfaate dayalı işlemelere itiraz hakkına sahipsin. Bu haklarını kullanmak için Künye sayfasındaki adrese başvurabilirsin. Ayrıca yetkili veri koruma denetim makamına şikayette bulunma hakkın vardır (Türkiye'de KVKK Kurumu, AB'de ilgili ulusal makam).",
+      },
+      {
+        title: "Bu politikadaki değişiklikler",
+        body: "Hizmetlerimiz veya geçerli mevzuat değiştiğinde bu politikayı güncelleriz. Yukarıda belirtilen tarihle burada yayımlanan sürüm geçerlidir.",
+      },
+    ],
+  },
+  imprintPage: {
+    title: "Künye",
+    subtitle: "§ 5 TMG / § 18 MStV uyarınca yasal bilgilendirme",
+    emailEncoded: "W0RFSU5FQEVNQUJMLURF",
+    sections: [
+      {
+        title: "Sağlayıcı",
+        address: {
+          name: "[AD SOYAD]",
+          street: "[SOKAK NO]",
+          city: "[POSTA KODU ŞEHİR]",
+          country: "Almanya",
+        },
+      },
+      {
+        title: "İletişim",
+        emailLabel: "E-posta:",
+      },
+      {
+        title: "İçerikten sorumlu",
+        body: "§ 18(2) MStV uyarınca içerikten sorumlu kişi:",
+        address: {
+          name: "[AD SOYAD]",
+          street: "[SOKAK NO]",
+          city: "[POSTA KODU ŞEHİR]",
+          country: "Almanya",
+        },
+      },
+      {
+        title: "KDV / küçük işletme bildirimi",
+        body: "Geçerliyse, § 27a UStG uyarınca KDV kimlik numarası burada belirtilmelidir. § 19 UStG kapsamındaki küçük işletmeler KDV uygulamaz.",
+      },
+      {
+        title: "AB çevrimiçi uyuşmazlık çözümü",
+        body: "Avrupa Komisyonu çevrimiçi uyuşmazlık çözümü için bir platform sunmaktadır: https://ec.europa.eu/consumers/odr. E-posta adresimiz yukarıda belirtilmiştir. Bir tüketici hakem heyeti önünde uyuşmazlık çözüm sürecine katılmaya istekli veya yükümlü değiliz.",
+      },
+      {
+        title: "İçerik için sorumluluk",
+        body: "§ 7(1) TMG kapsamında bu sayfalardaki kendi içeriğimizden genel kanunlar çerçevesinde sorumluyuz. Ancak §§ 8-10 TMG uyarınca, iletilen veya saklanan üçüncü taraf bilgilerini izlemekle veya yasadışı faaliyete işaret eden koşulları araştırmakla yükümlü değiliz. Genel kanunlar uyarınca bilgileri kaldırma veya engelleme yükümlülükleri etkilenmez.",
+      },
+      {
+        title: "Bağlantılar için sorumluluk",
+        body: "Sitemiz, içerikleri üzerinde herhangi bir etkimiz olmayan üçüncü taraf web sitelerine bağlantılar içerir. Bu nedenle bu içeriklere ilişkin sorumluluk kabul etmiyoruz. Bağlantı verilen sayfaların içeriğinden her zaman ilgili sağlayıcı veya işletmeci sorumludur. Yasa ihlallerinden haberdar olduğumuzda bu tür bağlantıları derhal kaldıracağız.",
+      },
+      {
+        title: "Telif hakkı",
+        body: "Bu sayfalarda site sahibi tarafından oluşturulan içerikler ve eserler Alman telif hakkı yasasına tabidir. Üçüncü tarafların katkıları bu şekilde işaretlenmiştir. Telif hakkı sınırlarının dışında çoğaltma, işleme, dağıtma ve her türlü değerlendirme, ilgili yazarın veya oluşturucusunun yazılı onayını gerektirir.",
       },
     ],
   },
