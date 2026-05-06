@@ -8,41 +8,75 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://burnafterchat.app";
 
+const TITLE = "Burn After Chat — Write the message you shouldn't send";
+const DESCRIPTION =
+  "A private fake chat to vent before you react. Get the angry text, drunk reply, or emotional draft out of your system. Local-only, no account, no AI, deleted forever in one tap.";
+
 export const metadata: Metadata = {
   title: {
-    default: "Burn After Chat – Write the message you should not send",
-    template: "%s | Burn After Chat",
+    default: TITLE,
+    template: "%s · Burn After Chat",
   },
-  description:
-    "A private fake chat for frustration, anger, and emotional drafts. Write it locally, don't send it, then delete it.",
+  description: DESCRIPTION,
+  applicationName: "Burn After Chat",
+  generator: "Next.js",
+  referrer: "strict-origin-when-cross-origin",
+  category: "lifestyle",
   keywords: [
-    "write message you should not send",
-    "anger chat",
+    "burn after chat",
+    "write the message you shouldn't send",
+    "vent before you text",
     "private venting app",
     "fake chat to vent",
-    "emotional draft",
-    "don't send angry text",
+    "anger chat journal",
     "calm down before replying",
-    "private frustration journal",
+    "emotional draft message",
+    "stop yourself from sending",
+    "drunk text prevention",
+    "rage text",
+    "don't send that text",
     "burn after writing",
+    "mental decluttering",
+    "write angry message safely",
   ],
   metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: "/",
+  },
+  authors: [{ name: "Burn After Chat" }],
+  creator: "Burn After Chat",
+  publisher: "Burn After Chat",
   openGraph: {
-    title: "Burn After Chat – Write the message you should not send",
-    description:
-      "A private fake chat for frustration, anger, and emotional drafts. Write it locally, don't send it, then delete it.",
+    title: TITLE,
+    description: DESCRIPTION,
     type: "website",
     url: siteUrl,
     siteName: "Burn After Chat",
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Burn After Chat – Write the message you should not send",
-    description:
-      "A private fake chat for frustration, anger, and emotional drafts. Write it locally, don't send it, then delete it.",
+    title: TITLE,
+    description: DESCRIPTION,
+    creator: "@burnafterchat",
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
   manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    title: "Burn After Chat",
+    statusBarStyle: "black-translucent",
+  },
   icons: {
     icon: [
       { url: "/icons/icon-192x192.png", sizes: "192x192", type: "image/png" },
@@ -50,13 +84,21 @@ export const metadata: Metadata = {
     ],
     apple: "/icons/apple-touch-icon.png",
   },
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#09090b",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#09090b" },
+    { media: "(prefers-color-scheme: light)", color: "#09090b" },
+  ],
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -66,9 +108,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-zinc-950 text-zinc-100 min-h-screen font-sans antialiased">
+      <body className="bg-zinc-950 text-zinc-100 min-h-dvh-screen font-sans antialiased">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-3 focus:py-2 focus:bg-zinc-900 focus:text-zinc-100 focus:rounded-md focus:ring-2 focus:ring-orange-500"
+        >
+          Skip to content
+        </a>
         <Header />
-        <main className="pb-16 sm:pb-0">{children}</main>
+        <main id="main" className="pb-20 sm:pb-0">
+          {children}
+        </main>
         <Footer />
         <MobileNav />
         <Analytics />

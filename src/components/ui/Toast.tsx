@@ -25,8 +25,10 @@ export default function Toast({
 
   return (
     <div
+      role="status"
+      aria-live="polite"
       className={cn(
-        "fixed bottom-6 left-1/2 -translate-x-1/2 z-50",
+        "fixed bottom-20 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-2rem)] mx-4",
         "bg-zinc-800 text-zinc-100 px-5 py-3 rounded-xl shadow-2xl border border-zinc-700",
         "transition-all duration-300",
         visible

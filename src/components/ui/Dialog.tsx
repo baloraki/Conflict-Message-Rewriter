@@ -33,14 +33,20 @@ export default function Dialog({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div
-        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+    <div
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-3 sm:p-4 pt-safe pb-safe"
+      role="dialog"
+      aria-modal="true"
+    >
+      <button
+        type="button"
+        aria-label="Close dialog"
+        className="absolute inset-0 bg-black/70 backdrop-blur-sm cursor-default"
         onClick={onClose}
       />
       <div
         className={cn(
-          "relative z-10 w-full max-w-md rounded-2xl bg-zinc-900 border border-zinc-700 p-6 shadow-2xl",
+          "relative z-10 w-full max-w-md rounded-2xl bg-zinc-900 border border-zinc-700 p-5 sm:p-6 shadow-2xl",
           className
         )}
       >

@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import ContactForm from "@/components/product/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contact – Burn After Chat",
+  title: "Contact",
   description: "Get in touch with the Burn After Chat team.",
+  alternates: { canonical: "/contact" },
+  robots: { index: true, follow: true },
 };
 
 export default function ContactPage() {

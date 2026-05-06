@@ -4,9 +4,17 @@ import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "About – Burn After Chat",
+  title: "About — Why Burn After Chat is fake by design",
   description:
-    "Why Burn After Chat exists, why it is fake by design, and why deletion is the core feature.",
+    "Why this app exists, why the recipient is fake, why no AI is used, and why deletion is the whole point.",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About — Why Burn After Chat is fake by design",
+    description:
+      "Fake recipient. No AI. Deletion is the feature. Here's why we built it that way.",
+    url: "/about",
+    type: "article",
+  },
 };
 
 export default function AboutPage() {
