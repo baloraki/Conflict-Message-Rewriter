@@ -296,7 +296,7 @@ export const dictionary: Dictionary = {
         body: "Amaç her öfkeli düşünceyi arşivlemek değil. Amaç onu gerçek birinin gelen kutusunun yerine başka bir yere koymak, sonra bırakmak. Silme anı sadece teknik bir eylem değil, bırakılmış hissi olmalı.",
       },
     ],
-    cardQuote: ""Duygulara kelimeler vermenin özel alanı."",
+    cardQuote: '"Duygulara kelimeler vermenin özel alanı."',
     cardCta: "Şimdi deneyin",
   },
   calmReplyPage: {

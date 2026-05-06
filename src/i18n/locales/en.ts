@@ -334,7 +334,7 @@ export const dictionary: Dictionary = {
         body: "The point is not to archive your emotions. The point is to put them somewhere that isn't a real person's inbox, then let them go. The delete moment is designed to feel like a release, not just a technical action.",
       },
     ],
-    cardQuote: "“A private space to put your feelings into words.”",
+    cardQuote: '”A private space to put your feelings into words.”',
     cardCta: "Try it now",
   },
   calmReplyPage: {

@@ -45,8 +45,8 @@ export function middleware(request: NextRequest) {
 
   // Check for language preference in localStorage via cookie
   const langCookie = request.cookies.get("NEXT_LOCALE")?.value;
-  if (langCookie && LOCALES.includes(langCookie)) {
-    preferredLocale = langCookie;
+  if (langCookie && LOCALES.includes(langCookie as any)) {
+    preferredLocale = langCookie as typeof preferredLocale;
   }
 
   // Redirect to locale-prefixed path

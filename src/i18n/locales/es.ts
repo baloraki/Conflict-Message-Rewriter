@@ -331,7 +331,7 @@ export const dictionary: Dictionary = {
         body: "El punto no es archivar tus emociones. El punto es ponerlas en algún lugar que no sea la bandeja de entrada de una persona real, después dejarlas ir. El momento de eliminación está diseñado para sentirse como una liberación, no solo una acción técnica.",
       },
     ],
-    cardQuote: ""Un espacio privado para poner tus sentimientos en palabras."",
+    cardQuote: '"Un espacio privado para poner tus sentimientos en palabras."',
     cardCta: "Pruébalo ahora",
   },
   calmReplyPage: {

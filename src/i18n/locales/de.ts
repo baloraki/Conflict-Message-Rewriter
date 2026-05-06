@@ -305,7 +305,7 @@ export const dictionary: Dictionary = {
         body: "Es geht nicht darum, deine Gefühle zu archivieren. Es geht darum, sie an einem Ort abzulegen, der nicht der Posteingang einer echten Person ist, und sie dann gehen zu lassen. Der Lösch-Moment soll sich wie Loslassen anfühlen, nicht nur wie eine technische Aktion.",
       },
     ],
-    cardQuote: "„Ein privater Raum, um Gefühlen Worte zu geben.“",
+    cardQuote: '”Ein privater Raum, um Gefühlen Worte zu geben.”',
     cardCta: "Jetzt ausprobieren",
   },
   calmReplyPage: {
