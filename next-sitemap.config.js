@@ -1,18 +1,23 @@
 /** @type {import('next-sitemap').IConfig} */
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://dontsend.org';
+
+/** @type {import('next-sitemap').IConfig} */
 const config = {
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://burnafterchat.app',
+  siteUrl,
   generateRobotsTxt: true,
   outDir: 'public',
   exclude: [
     '/imprint',
     '/contact',
     '/privacy',
+    '/datenschutz',
     '/en/imprint',
     '/en/contact',
     '/en/privacy',
     '/de/imprint',
     '/de/contact',
     '/de/privacy',
+    '/de/datenschutz',
     '/es/imprint',
     '/es/contact',
     '/es/privacy',
@@ -30,12 +35,14 @@ const config = {
           '/imprint',
           '/contact',
           '/privacy',
+          '/datenschutz',
           '/en/imprint',
           '/en/contact',
           '/en/privacy',
           '/de/imprint',
           '/de/contact',
           '/de/privacy',
+          '/de/datenschutz',
           '/es/imprint',
           '/es/contact',
           '/es/privacy',
@@ -45,6 +52,7 @@ const config = {
         ],
       },
     ],
+    additionalSitemaps: [`${siteUrl}/sitemap.xml`],
   },
 };
 
