@@ -4,14 +4,16 @@ import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "About — Why Burn After Chat is fake by design",
+  title:
+    "About Burn After Chat — Why a Fake Chat Is the Safest Place to Vent",
   description:
-    "Why this app exists, why the recipient is fake, why no AI is used, and why deletion is the whole point.",
+    "Why Burn After Chat exists: a private fake chat for venting anger and frustration without sending. Why the recipient is fake, why we use no AI, and why permanent deletion is the whole point of the app.",
   alternates: { canonical: "/about" },
   openGraph: {
-    title: "About — Why Burn After Chat is fake by design",
+    title:
+      "About Burn After Chat — Why a Fake Chat Is the Safest Place to Vent",
     description:
-      "Fake recipient. No AI. Deletion is the feature. Here's why we built it that way.",
+      "Fake recipient. No AI. Deletion is the feature. Here's why a private vent space without an audience or algorithm beats screaming into a real inbox.",
     url: "/about",
     type: "article",
   },
@@ -20,9 +22,12 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold text-zinc-100 mb-2">About</h1>
+      <h1 className="text-3xl font-bold text-zinc-100 mb-2">
+        About Burn After Chat
+      </h1>
       <p className="text-zinc-400 mb-10 text-lg">
-        Why this app exists, and why it works the way it does.
+        A private space to vent anger, frustration and stress — and why a fake
+        chat with no audience and no AI is the safest version of that.
       </p>
 
       <div className="space-y-8 text-zinc-300 leading-relaxed">
@@ -32,14 +37,16 @@ export default function AboutPage() {
           </h2>
           <p>
             Most regrettable messages are sent in the heat of the moment. The
-            message you send at 2am, the reply you type when you&apos;re
-            furious, the text you send before thinking — these are often
-            messages you wish you could take back.
+            text you send at 2 a.m. to your ex, the reply you fire off at your
+            boss when you&apos;re furious, the comment you post about a friend,
+            the rant you send to the family group chat — these are almost
+            always messages you wish you could take back.
           </p>
           <p className="mt-3">
             Burn After Chat gives you a place to write the first version. The
-            raw one. The one you&apos;d regret. Write it here instead. Then
-            decide what, if anything, to actually send.
+            raw, ugly, honest one. The one you&apos;d absolutely regret in the
+            morning. You write it here instead of there. Then you decide, with a
+            calmer head, what — if anything — to actually send.
           </p>
         </section>
 

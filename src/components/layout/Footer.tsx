@@ -11,7 +11,8 @@ export default function Footer() {
               <span className="font-bold text-zinc-200">Burn After Chat</span>
             </div>
             <p className="text-zinc-500 text-sm max-w-xs">
-              A private space to put your feelings into words.
+              A private fake chat to vent anger, frustration and stress —
+              before you send the message you&apos;d regret.
             </p>
           </div>
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-zinc-500">

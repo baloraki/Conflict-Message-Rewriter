@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms of Use",
+  title: "Terms of Use — Free Private Venting Tool",
   description:
-    "Terms of use for Burn After Chat. Free private writing tool — not therapy, not legal advice, not crisis support.",
+    "Terms of use for Burn After Chat. Free, private, anonymous venting tool for letting out anger and frustration. Not therapy, not legal advice, not crisis support — just a writing space that deletes itself.",
   alternates: { canonical: "/terms" },
   openGraph: {
     title: "Terms of Use — Burn After Chat",
     description:
-      "Free private writing tool. Not therapy, not legal advice, not crisis support.",
+      "Free private venting tool. Not therapy, not legal advice, not crisis support.",
     url: "/terms",
     type: "article",
   },
