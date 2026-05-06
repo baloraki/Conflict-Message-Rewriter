@@ -11,6 +11,7 @@ interface FooterProps {
       terms: string;
       disclaimer: string;
       contact: string;
+      imprint: string;
     };
     disclaimer: string;
   };
@@ -59,10 +60,10 @@ export default function Footer({ locale, translations }: FooterProps) {
               {translations.links.contact}
             </Link>
             <Link
-              href="/imprint"
+              href={`/${locale}/imprint`}
               className="hover:text-zinc-300 transition-colors"
             >
-              Imprint
+              {translations.links.imprint}
             </Link>
           </div>
         </div>

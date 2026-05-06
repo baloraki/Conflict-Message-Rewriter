@@ -123,6 +123,11 @@ export const dictionary: Dictionary = {
       description:
         "Terms of use for Burn After Chat. Free, private, anonymous venting tool for letting out anger and frustration. Not therapy, not legal advice, not crisis support — just a writing space that deletes itself.",
     },
+    imprint: {
+      title: "Imprint",
+      description:
+        "Legal disclosure pursuant to § 5 TMG (German Telemedia Act) for Burn After Chat. Operator details, contact and responsible party for content.",
+    },
   },
   layout: {
     skipToContent: "Skip to content",
@@ -143,6 +148,7 @@ export const dictionary: Dictionary = {
       terms: "Terms",
       disclaimer: "Disclaimer",
       contact: "Contact",
+      imprint: "Imprint",
     },
     disclaimer:
       "This app is not therapy, crisis support, legal advice, or professional mediation. If you feel unsafe, threatened, at risk of harming yourself or someone else, or trapped in abuse, contact local emergency services or a trusted professional.",
@@ -364,39 +370,117 @@ export const dictionary: Dictionary = {
   },
   privacyPage: {
     title: "Privacy Policy",
-    lastUpdated: "Last updated: May 2025",
+    lastUpdated: "Last updated: May 2026",
     sections: [
       {
         title: "The short version",
-        body: "Burn After Chat does not collect, store, or transmit your chat messages. Your messages live only in your browser memory while the page is open. Reloading or deleting the chat removes them completely and permanently.",
+        body: "Burn After Chat does not collect, store, or transmit your chat messages. Your messages live only in your browser memory while the page is open. Reloading or deleting the chat removes them completely and permanently. This policy informs you in line with Articles 13 and 14 GDPR about how we process personal data.",
       },
       {
-        title: "No accounts",
-        body: "There is no user account system. You do not log in. No personal information is collected or required.",
+        title: "Data controller",
+        body: "The controller responsible for the processing of personal data on this website is the operator named in the Imprint. You will find contact details on the Imprint page.",
+      },
+      {
+        title: "No accounts, no registration",
+        body: "There is no user account system. You do not log in. We do not collect names, email addresses, dates of birth, phone numbers or comparable personal identifiers in order to use the app.",
       },
       {
         title: "Chat messages",
-        body: "Chat messages are stored only in React component state in your browser. They are never written to localStorage, sessionStorage, IndexedDB, cookies, URL parameters, or any server or database. They disappear when you delete the chat, reload the page, or close the tab.",
+        body: "Chat messages are held only ephemerally in React component state in your browser. They are never written to localStorage, sessionStorage, IndexedDB, cookies, URL parameters, log files, or any server or database, and they are never transmitted over the network. They disappear the moment you delete the chat, reload the page, or close the tab.",
       },
       {
         title: "No backend message storage",
-        body: "The app has no backend. Your messages are never transmitted over the internet. No server receives or processes them.",
+        body: "The core app (chat) has no backend of its own. Your messages are never transmitted over the internet. No server receives or processes them.",
       },
       {
         title: "No AI APIs",
-        body: "The app does not use any AI or machine learning APIs. Fake replies are generated from a local predefined list. Nothing you type is analyzed, classified, or processed by an external service.",
+        body: "The app does not use any AI or machine learning APIs. Fake replies are generated from a local predefined list shipped with the page. Nothing you type is analyzed, classified, or processed by an external service.",
       },
       {
-        title: "Analytics and tracking",
-        body: "No analytics or tracking scripts are included by default. The app is designed to be as private as possible.",
+        title: "Hosting and server logs",
+        body: "This site is hosted by Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA. When you load the page, Vercel processes technically necessary connection data (such as IP address, date/time, user agent, requested URL) as a processor on our behalf. The legal basis is Art. 6(1)(f) GDPR (legitimate interest in providing a stable, secure website). IP addresses are not permanently linked to your identity. We have a data processing agreement with Vercel including the EU Standard Contractual Clauses. See https://vercel.com/legal/privacy-policy.",
       },
       {
-        title: "Local preferences",
-        body: "The app may use localStorage to store non-sensitive preferences such as your selected language or whether you have seen the intro. This data does not leave your device.",
+        title: "Analytics — Simple Analytics",
+        body: "We use Simple Analytics (Simple Analytics B.V., Netherlands, https://www.simpleanalytics.com) for privacy-friendly traffic measurement. Simple Analytics sets no cookies, builds no cross-site profiles, and does not transfer data outside the EU/EEA. We collect anonymised, aggregated statistics only (page views, referrer, approximate country derived from a truncated IP, browser/device class). IP addresses are processed only briefly in memory and are not stored. No personal profiles are created. Legal basis: Art. 6(1)(f) GDPR (legitimate interest in cookieless, data-minimising analytics to improve the service). Because no information is read from or stored on your device for this purpose, no consent under § 25 TDDDG / ePrivacy is required. Details: https://docs.simpleanalytics.com/what-we-collect.",
+      },
+      {
+        title: "Vercel Analytics & Speed Insights",
+        body: "We additionally use Vercel Web Analytics and Vercel Speed Insights (Vercel Inc., USA) to anonymously measure page views and performance metrics (Core Web Vitals). Vercel Analytics is cookieless and does not build user profiles; IP addresses are used only to compute a daily, salted, anonymous visitor hash and are not stored. Legal basis: Art. 6(1)(f) GDPR. As Vercel processes data in the USA, transfers are based on the EU Standard Contractual Clauses and additionally on the EU-US Data Privacy Framework. Details: https://vercel.com/docs/analytics/privacy-policy.",
+      },
+      {
+        title: "Local preferences (localStorage)",
+        body: "The app stores technically necessary, non-sensitive preferences in your browser's localStorage — for example your selected language (preferred_locale) and whether you have dismissed the intro. A cookie 'NEXT_LOCALE' is set so that the server can honour your language choice on subsequent requests. This storage is permitted without consent under § 25(2)(2) TDDDG / Art. 5(3) ePrivacy because it is strictly necessary for a service explicitly requested by you (language selection). The data does not leave your device and is not shared with third parties.",
       },
       {
         title: "Contact form",
-        body: "If you use the contact form, your message is submitted to a third-party form service (Web3Forms). Only what you type in the form is transmitted. See Web3Forms' privacy policy for how they handle form submissions.",
+        body: "If you use the contact form, your message is delivered via Web3Forms (10Web Inc., USA). The data you enter (name, email, subject, message) is processed for that purpose. Legal basis: Art. 6(1)(b) GDPR (handling your inquiry) or Art. 6(1)(f) GDPR (legitimate interest in efficient communication). We have a processor relationship with Web3Forms; transfers to the USA are safeguarded by the EU Standard Contractual Clauses. We retain inquiries only as long as needed to handle them. See https://web3forms.com/privacy.",
+      },
+      {
+        title: "Recipients and international transfers",
+        body: "Personal data is only shared with the processors listed above (Vercel, Simple Analytics, Web3Forms). Where data is transferred to the USA, transfers are safeguarded by the EU Standard Contractual Clauses (SCCs) and additionally by the EU-US Data Privacy Framework. We do not sell personal data and do not engage in profiling. No automated decision-making within the meaning of Art. 22 GDPR takes place.",
+      },
+      {
+        title: "Retention",
+        body: "Chat content is not stored. Analytics data is retained only in aggregated, anonymised form. Server logs are kept by the host only briefly to ensure operation and security. Contact form inquiries are deleted as soon as they are no longer needed, at the latest after 12 months — unless statutory retention obligations apply.",
+      },
+      {
+        title: "Your rights",
+        body: "Under GDPR you have the right to access (Art. 15), rectification (Art. 16), erasure (Art. 17), restriction of processing (Art. 18), data portability (Art. 20) and the right to object to processing based on Art. 6(1)(f) GDPR (Art. 21). To exercise these rights, contact the address listed in the Imprint. You also have the right under Art. 77 GDPR to lodge a complaint with a data protection supervisory authority.",
+      },
+      {
+        title: "Changes to this policy",
+        body: "We update this policy when our services or applicable laws change. The version published here, with the date shown above, applies.",
+      },
+    ],
+  },
+  imprintPage: {
+    title: "Imprint",
+    subtitle: "Legal disclosure pursuant to § 5 TMG / § 18 MStV",
+    emailEncoded: "W0RFSU5FQEVNQUJMLURF",
+    sections: [
+      {
+        title: "Operator",
+        address: {
+          name: "[FIRST LAST]",
+          street: "[STREET NUMBER]",
+          city: "[POSTAL CODE CITY]",
+          country: "Germany",
+        },
+      },
+      {
+        title: "Contact",
+        emailLabel: "Email:",
+      },
+      {
+        title: "Responsible for content",
+        body: "Responsible for content pursuant to § 18(2) MStV:",
+        address: {
+          name: "[FIRST LAST]",
+          street: "[STREET NUMBER]",
+          city: "[POSTAL CODE CITY]",
+          country: "Germany",
+        },
+      },
+      {
+        title: "VAT / small-business note",
+        body: "If applicable, the VAT identification number under § 27a UStG should be stated here. Operators using the small-business scheme under § 19 UStG do not charge VAT.",
+      },
+      {
+        title: "EU online dispute resolution",
+        body: "The European Commission provides a platform for online dispute resolution: https://ec.europa.eu/consumers/odr. Our email address is shown above. We are neither willing nor obliged to participate in dispute settlement proceedings before a consumer arbitration board.",
+      },
+      {
+        title: "Liability for content",
+        body: "As a service provider we are responsible for our own content on these pages in accordance with § 7(1) TMG and general laws. According to §§ 8 to 10 TMG, however, we are not obliged to monitor transmitted or stored third-party information, or to investigate circumstances that indicate illegal activity. Obligations to remove or block the use of information under general laws remain unaffected.",
+      },
+      {
+        title: "Liability for links",
+        body: "Our offer contains links to external third-party websites whose content we have no influence over. We therefore cannot accept any liability for this third-party content. The provider or operator of the linked pages is always responsible for their content. Should we become aware of any infringements we will remove such links immediately.",
+      },
+      {
+        title: "Copyright",
+        body: "Content and works on these pages created by the site operator are subject to German copyright law. Contributions by third parties are marked as such. Reproduction, processing, distribution and any kind of exploitation outside the limits of copyright require the written consent of the respective author or creator.",
       },
     ],
   },
