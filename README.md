@@ -2,7 +2,7 @@
 
 Write the message you should not send.
 
-Burn After Chat is a Next.js web app for private emotional drafting: users vent in a fake chat, then delete the chat when done.
+Burn After Chat is an open-source, privacy-focused Next.js app for private emotional drafting: users vent in a fake chat, reframe, then burn/delete the chat when done.
 
 ## Why this exists
 
@@ -25,8 +25,10 @@ This project is privacy-focused, but not “zero local storage.”
 - **Chat messages** are stored in browser `localStorage` under `chat_messages` to persist across reloads until the user burns/deletes them.
 - **Language preference** is stored in `localStorage` (`preferred_locale`) and synchronized to a `NEXT_LOCALE` cookie for routing.
 - **No app backend database** stores chat messages.
-- **Contact form** (if configured) sends submitted data directly to Web3Forms.
-- **Analytics scripts are present** (`@vercel/analytics`, `@vercel/speed-insights`, and Simple Analytics script in layout).
+- **Chat messages are never sent** to analytics, Web3Forms, or third-party AI APIs.
+- **Contact form** (if configured) sends only contact submission data directly to Web3Forms.
+- **Optional AI replies** use on-device/local model inference via Transformers.js when enabled.
+- **Analytics scripts are present** (`@vercel/analytics`, `@vercel/speed-insights`, and Simple Analytics script in layout) and must not include chat content.
 
 If you open source this publicly, keep privacy copy consistent with real behavior.
 
@@ -84,11 +86,22 @@ src/
 
 ## Safety note
 
-This app is not therapy, crisis support, legal advice, or professional mediation.
+This app is not therapy, crisis support, legal advice, or professional mediation. It is suitable as a learning/open-source emotional drafting project, not as a clinical product.
+
+## Public repository readiness (recommended)
+
+- **Suggested GitHub description:** `Open-source privacy-focused emotional drafting app for writing, reframing, and burning messages you should not send.`
+- **Suggested topics:** `nextjs`, `typescript`, `pwa`, `privacy`, `mental-health-adjacent`, `emotional-regulation`, `local-first`, `tailwindcss`, `react`
+- Before making the repository public, verify:
+  - privacy and legal pages match real behavior
+  - analytics disclosures are accurate
+  - no chat content is sent to third parties
+  - `.env` files and commit history contain no secrets
+- Run a secret scan before public release.
 
 ## Contributing
 
-Issues and pull requests are welcome. Please run lint, typecheck, and tests before submitting.
+Issues and pull requests are welcome. Please run lint, typecheck, tests, and build before submitting.
 
 ## License
 
