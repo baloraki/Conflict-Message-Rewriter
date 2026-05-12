@@ -1,4 +1,4 @@
-# Burn After Chat (Conflict Message Rewriter)
+# Burn After Chat
 
 Write the message you should not send.
 
