@@ -1,155 +1,95 @@
-# 🔥 Burn After Chat
+# Burn After Chat (Conflict Message Rewriter)
 
-> Write the message you should not send.
+Write the message you should not send.
 
-A private fake chat for anger, frustration, and emotional drafts. Nothing is sent. Nothing is saved. Delete it when you're done.
+Burn After Chat is a Next.js web app for private emotional drafting: users vent in a fake chat, then delete the chat when done.
 
----
+## Why this exists
 
-## What it is
+This project gives people a safer “pause” before sending emotional messages. It is designed for de-escalation, not for real-time communication.
 
-Burn After Chat is a local-only emotional pressure-release space. Users write whatever they feel into a fake chat. Simple, pre-written supportive responses appear. When the chat is deleted, the messages are gone permanently.
+## Core features
 
-**The product metaphor:** "Let the message out here, not on someone else."
+- Fake chat interface with "Void" as recipient
+- Burn flow that clears chat history
+- Optional AI-generated one-sentence reply using **on-device** Transformers.js (when enabled)
+- Local predefined fallback replies when AI is unavailable
+- Calm Reply composer templates
+- Locale-aware routing and translations (`en`, `de`, `tr`, `es`)
+- PWA metadata and icons
 
----
+## Privacy and data handling (important)
 
-## Core concept
+This project is privacy-focused, but not “zero local storage.”
 
-- The chat is fake. The recipient ("Void") is not real.
-- There is no AI. Replies are selected from a local predefined list.
-- Nothing you type leaves your browser. No server, no database, no API.
-- Messages live only in React component state. They disappear on reload, close, or delete.
-- The deletion is the feature.
+- **Chat messages** are stored in browser `localStorage` under `chat_messages` to persist across reloads until the user burns/deletes them.
+- **Language preference** is stored in `localStorage` (`preferred_locale`) and synchronized to a `NEXT_LOCALE` cookie for routing.
+- **No app backend database** stores chat messages.
+- **Contact form** (if configured) sends submitted data directly to Web3Forms.
+- **Analytics scripts are present** (`@vercel/analytics`, `@vercel/speed-insights`, and Simple Analytics script in layout).
 
----
-
-## Privacy model
-
-- **Chat messages:** React state only. Never written to localStorage, sessionStorage, IndexedDB, cookies, URL params, or any backend.
-- **No accounts:** No login, no user data collected.
-- **No analytics:** No tracking scripts by default.
-- **No AI:** No external API calls. All replies are local.
-- **Local preferences:** localStorage may be used only for non-sensitive app preferences (e.g. theme).
-
----
-
-## Why no AI is used
-
-AI requires messages to be sent to an external server, which would immediately break the privacy promise. All replies are pre-written, calm, and deliberately simple.
-
----
+If you open source this publicly, keep privacy copy consistent with real behavior.
 
 ## Tech stack
 
-- [Next.js](https://nextjs.org/) 16+ (App Router)
-- TypeScript
+- Next.js 16 (App Router)
+- React 19 + TypeScript
 - Tailwind CSS v4
-- ESLint
 - Vitest + React Testing Library
-- PWA (manifest + icons)
-- No backend, no database, no auth, no AI
-
----
+- ESLint
 
 ## Local development
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open `http://localhost:3000`.
 
----
+## Available scripts
+
+```bash
+npm run dev        # Start dev server
+npm run build      # Production build
+npm run start      # Start production server
+npm run lint       # ESLint (src)
+npm run typecheck  # TypeScript checks
+npm run test       # Run unit tests once
+npm run test:watch # Run tests in watch mode
+```
 
 ## Environment variables
 
-Copy `.env.example` to `.env.local` and fill in values:
-
-```bash
-cp .env.example .env.local
-```
+Create `.env.local` in the project root and set values as needed:
 
 | Variable | Required | Description |
 |---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | Optional | Full base URL for SEO metadata (e.g. `https://burnafterchat.app`) |
-| `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` | Optional | Access key for Web3Forms contact form. If missing, form shows disabled state. |
+| `NEXT_PUBLIC_SITE_URL` | Optional | Public base URL used in metadata/sitemap |
+| `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` | Optional | Enables contact form submission via Web3Forms |
+| `NEXT_PUBLIC_MODEL_ID` | Optional | Enables on-device Transformers.js generation with the given model |
 
----
-
-## Deployment
-
-Deploy directly to [Vercel](https://vercel.com):
-
-```bash
-vercel deploy
-```
-
-Or connect the GitHub repo to Vercel for automatic deployments.
-
-The app requires no backend setup. It is a fully static Next.js application.
-
----
-
-## PWA notes
-
-The app includes a `public/manifest.json` and placeholder icons. For production, replace the placeholder icons in `public/icons/` with proper branded icons (192×192 and 512×512 PNG).
-
----
-
-## Testing
-
-```bash
-npm run test         # Run all tests once
-npm run test:watch   # Watch mode
-```
-
-Tests cover:
-- Fake reply generator returns non-empty, safe replies
-- Safety keyword detection
-- Calm reply templates (all 8 situations, 40+ templates total)
-- No messages written to localStorage
-
----
+If `NEXT_PUBLIC_MODEL_ID` is not set, chat replies fall back to local predefined messages.
 
 ## Project structure
 
-```
+```text
 src/
-  app/                     # Next.js App Router pages
-    page.tsx               # Homepage / landing
-    chat/page.tsx          # Fake chat
-    calm-reply/page.tsx    # Calm reply composer
-    privacy/page.tsx       # Privacy policy
-    terms/page.tsx         # Terms of use
-    disclaimer/page.tsx    # Safety disclaimer
-    about/page.tsx         # About
-    contact/page.tsx       # Contact
-    layout.tsx             # Root layout
-    globals.css            # Global styles
-
-  components/
-    layout/                # Header, Footer, MobileNav
-    ui/                    # Button, Card, Badge, Dialog, Toast, Textarea
-    chat/                  # FakeChat, ChatBubble, ChatInput, TypingIndicator, etc.
-    product/               # CalmReplyComposer, FAQ, PrivacyPill, DisclaimerBox, etc.
-
-  lib/
-    chat/                  # fakeReplies, safetyKeywords, fakeReplyGenerator, types
-    calm/                  # calmTemplates, calmReplyGenerator, types
-    seo/                   # structuredData
-    utils.ts               # cn, generateId, formatTime
-
-  tests/                   # Vitest unit tests
+  app/              # App routes, layouts, metadata, locale pages
+  components/       # UI, chat, layout, and product components
+  i18n/             # Locale config and dictionaries
+  lib/              # Chat/calm generators, validation, SEO helpers
+  tests/            # Vitest tests
 ```
 
----
+## Safety note
 
-## Safety disclaimer
+This app is not therapy, crisis support, legal advice, or professional mediation.
 
-This app is not therapy, crisis support, legal advice, or professional mediation. If you feel unsafe, threatened, at risk of harming yourself or someone else, or trapped in abuse, contact local emergency services or a trusted professional.
+## Contributing
 
-- 🇺🇸 National Suicide Prevention Lifeline: **988**
-- 🇺🇸 Crisis Text Line: **HOME to 741741**
-- 🇺🇸 National Domestic Violence Hotline: **1-800-799-7233**
+Issues and pull requests are welcome. Please run lint, typecheck, and tests before submitting.
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](./LICENSE).
