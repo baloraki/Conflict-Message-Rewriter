@@ -103,6 +103,18 @@ This app is not therapy, crisis support, legal advice, or professional mediation
 
 Issues and pull requests are welcome. Please run lint, typecheck, tests, and build before submitting.
 
+## SEO verification (production)
+
+After deployment, verify canonical/hreflang/OpenGraph/sitemap output:
+
+```bash
+curl -L https://dontsend.org/tr | grep -iE 'canonical|alternate|og:url|html lang'
+curl -L https://dontsend.org/de | grep -iE 'canonical|alternate|og:url|html lang'
+curl -L https://dontsend.org/en | grep -iE 'canonical|alternate|og:url|html lang'
+curl -L https://dontsend.org/es | grep -iE 'canonical|alternate|og:url|html lang'
+curl -L https://dontsend.org/sitemap.xml | grep -i 'burnafterchat.app'
+```
+
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](./LICENSE).

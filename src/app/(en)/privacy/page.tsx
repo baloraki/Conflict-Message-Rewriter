@@ -6,6 +6,8 @@ export const metadata: Metadata = buildMetadata({
   title: "Privacy Policy – Burn After Chat",
   description:
     "How Burn After Chat handles your data. Spoiler: it does not collect any.",
+  canonicalPath: "/en/privacy",
+  openGraphType: "article",
 });
 
 export default function PrivacyPage() {

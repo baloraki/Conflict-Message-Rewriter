@@ -4,6 +4,7 @@ import type { Locale } from "@/i18n/config";
 import Link from "next/link";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
+import { absoluteUrl } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -22,11 +23,11 @@ export async function generateMetadata({
   return {
     title: dictionary.meta.about.title,
     description: dictionary.meta.about.description,
-    alternates: { canonical: `/${locale}/about` },
+    alternates: { canonical: absoluteUrl(`/${locale}/about`) },
     openGraph: {
       title: dictionary.meta.about.title,
       description: dictionary.meta.about.description,
-      url: `/${locale}/about`,
+      url: absoluteUrl(`/${locale}/about`),
       type: "article",
     },
   };

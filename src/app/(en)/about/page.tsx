@@ -6,6 +6,8 @@ export const metadata: Metadata = buildMetadata({
   title: "About – Burn After Chat",
   description:
     "Why Burn After Chat exists, why it is fake by design, and why deletion is the core feature.",
+  canonicalPath: "/en/about",
+  openGraphType: "article",
 });
 
 export default function AboutPage() {

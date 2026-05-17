@@ -2,6 +2,7 @@ import ContactForm from "@/components/product/ContactForm";
 import { getDictionary } from "@/i18n/dictionaries";
 import { isLocale } from "@/i18n/config";
 import type { Locale } from "@/i18n/config";
+import { absoluteUrl } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -17,7 +18,7 @@ export async function generateMetadata({
   return {
     title: dictionary.meta.contact.title,
     description: dictionary.meta.contact.description,
-    alternates: { canonical: `/${locale}/contact` },
+    alternates: { canonical: absoluteUrl(`/${locale}/contact`) },
     robots: { index: true, follow: true },
   };
 }

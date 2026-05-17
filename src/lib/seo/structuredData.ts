@@ -1,5 +1,4 @@
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://burnafterchat.app";
+import { SITE_URL, absoluteUrl } from "@/lib/site";
 
 export function getWebAppStructuredData() {
   return {
@@ -15,7 +14,7 @@ export function getWebAppStructuredData() {
     operatingSystem: "Any",
     browserRequirements: "Requires JavaScript and a modern browser.",
     isAccessibleForFree: true,
-    image: `${SITE_URL}/opengraph-image`,
+    image: absoluteUrl("/opengraph-image"),
     inLanguage: ["en", "de", "es", "fr", "it", "pt"],
     offers: {
       "@type": "Offer",
@@ -66,7 +65,7 @@ export function getOrganizationStructuredData() {
     "@type": "Organization",
     name: "Burn After Chat",
     url: SITE_URL,
-    logo: `${SITE_URL}/icons/icon-512x512.png`,
+    logo: absoluteUrl("/icons/icon-512x512.png"),
   };
 }
 
@@ -116,7 +115,7 @@ export function getHowToStructuredData() {
         position: 1,
         name: "Open a private chat to vent",
         text: "Open Burn After Chat in your browser. No sign-up, no email, no account. A fake chat opens instantly, just for you.",
-        url: `${SITE_URL}/chat`,
+        url: absoluteUrl("/en/chat"),
       },
       {
         "@type": "HowToStep",

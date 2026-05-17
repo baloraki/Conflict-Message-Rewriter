@@ -29,7 +29,7 @@ export default function PrivacyPageContent() {
           <p>
             The controller responsible for the processing of personal data on
             this website is the operator named in the{" "}
-            <Link href="/imprint" className="text-orange-400 hover:underline">
+            <Link href="/en/imprint" className="text-orange-400 hover:underline">
               Imprint
             </Link>
             .
@@ -245,7 +245,7 @@ export default function PrivacyPageContent() {
             portability (Art. 20) and the right to object to processing based
             on Art. 6(1)(f) GDPR (Art. 21). To exercise these rights, contact
             us via the{" "}
-            <Link href="/contact" className="text-orange-400 hover:underline">
+            <Link href="/en/contact" className="text-orange-400 hover:underline">
               contact page
             </Link>
             . You also have the right under Art. 77 GDPR to lodge a complaint
