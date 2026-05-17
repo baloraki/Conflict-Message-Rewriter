@@ -25,7 +25,7 @@ describe("SEO URL configuration", () => {
     });
   });
 
-  it("has no burnafterchat.app in source SEO config or sitemap config", () => {
+  it("has no burnafterchat.app references in layouts, pages, or sitemap config", () => {
     const rootLayoutFile = readFileSync(
       resolve(process.cwd(), "src/app/layout.tsx"),
       "utf8"
