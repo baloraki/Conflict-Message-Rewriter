@@ -4,6 +4,7 @@ import DisclaimerBox from "@/components/product/DisclaimerBox";
 import { getDictionary } from "@/i18n/dictionaries";
 import { isLocale } from "@/i18n/config";
 import type { Locale } from "@/i18n/config";
+import { absoluteUrl } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -19,11 +20,11 @@ export async function generateMetadata({
   return {
     title: dictionary.meta.calmReply.title,
     description: dictionary.meta.calmReply.description,
-    alternates: { canonical: `/${locale}/calm-reply` },
+    alternates: { canonical: absoluteUrl(`/${locale}/calm-reply`) },
     openGraph: {
       title: dictionary.meta.calmReply.title,
       description: dictionary.meta.calmReply.description,
-      url: `/${locale}/calm-reply`,
+      url: absoluteUrl(`/${locale}/calm-reply`),
       type: "website",
     },
   };

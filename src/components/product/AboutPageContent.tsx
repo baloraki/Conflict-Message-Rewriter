@@ -76,7 +76,7 @@ export default function AboutPageContent() {
           <p className="text-zinc-400 text-sm mb-4">
             &ldquo;A private space to put your feelings into words.&rdquo;
           </p>
-          <Link href="/chat">
+          <Link href="/en/chat">
             <Button>Try it now</Button>
           </Link>
         </Card>

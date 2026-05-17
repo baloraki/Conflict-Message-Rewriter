@@ -14,6 +14,7 @@ import {
 import { getDictionary } from "@/i18n/dictionaries";
 import { isLocale } from "@/i18n/config";
 import type { Locale } from "@/i18n/config";
+import { absoluteUrl } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -29,11 +30,11 @@ export async function generateMetadata({
   return {
     title: dictionary.meta.home.title,
     description: dictionary.meta.home.description,
-    alternates: { canonical: `/${locale}` },
+    alternates: { canonical: absoluteUrl(`/${locale}`) },
     openGraph: {
       title: dictionary.meta.home.title,
       description: dictionary.meta.home.description,
-      url: `/${locale}`,
+      url: absoluteUrl(`/${locale}`),
       type: "website",
     },
   };

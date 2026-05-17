@@ -1,5 +1,14 @@
 /** @type {import('next-sitemap').IConfig} */
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://dontsend.org';
+const normalizeSiteUrl = (value) => {
+  const parsed = new URL(value);
+  parsed.hash = '';
+  parsed.search = '';
+  return parsed.origin;
+};
+
+const siteUrl = normalizeSiteUrl(
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://dontsend.org'
+);
 
 /** @type {import('next-sitemap').IConfig} */
 const config = {

@@ -6,8 +6,7 @@ import type { Locale } from "@/i18n/config";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MobileNav from "@/components/layout/MobileNav";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://burnafterchat.app";
+import { SITE_URL, absoluteUrl, localizedAlternates } from "@/lib/site";
 
 export async function generateStaticParams() {
   return LOCALES.map((locale) => ({
@@ -40,15 +39,10 @@ export async function generateMetadata({
     referrer: "strict-origin-when-cross-origin",
     category: "lifestyle",
     keywords: dictionary.meta.keywords,
-    metadataBase: new URL(siteUrl),
+    metadataBase: new URL(SITE_URL),
     alternates: {
-      canonical: `/${locale}`,
-      languages: {
-        en: `${siteUrl}/en`,
-        de: `${siteUrl}/de`,
-        tr: `${siteUrl}/tr`,
-        es: `${siteUrl}/es`,
-      },
+      canonical: absoluteUrl(`/${locale}`),
+      languages: localizedAlternates(),
     },
     authors: [{ name: dictionary.meta.siteName }],
     creator: dictionary.meta.siteName,
@@ -57,7 +51,7 @@ export async function generateMetadata({
       title: dictionary.meta.layoutTitle,
       description: dictionary.meta.layoutDescription,
       type: "website",
-      url: `${siteUrl}/${locale}`,
+      url: absoluteUrl(`/${locale}`),
       siteName: dictionary.meta.siteName,
       locale: OG_LOCALE[locale],
       alternateLocale: Object.values(OG_LOCALE),

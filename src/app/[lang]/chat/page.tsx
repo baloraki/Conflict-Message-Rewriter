@@ -2,6 +2,7 @@ import FakeChat from "@/components/chat/FakeChat";
 import { getDictionary } from "@/i18n/dictionaries";
 import { isLocale } from "@/i18n/config";
 import type { Locale } from "@/i18n/config";
+import { absoluteUrl } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -17,7 +18,7 @@ export async function generateMetadata({
   return {
     title: dictionary.meta.chat.title,
     description: dictionary.meta.chat.description,
-    alternates: { canonical: `/${locale}/chat` },
+    alternates: { canonical: absoluteUrl(`/${locale}/chat`) },
     robots: { index: false, follow: false },
   };
 }

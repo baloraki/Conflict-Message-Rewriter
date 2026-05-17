@@ -3,6 +3,7 @@ import { isLocale } from "@/i18n/config";
 import type { Locale } from "@/i18n/config";
 import { ObfuscatedEmail } from "@/components/ui/ObfuscatedEmail";
 import { getImprintContactData } from "@/lib/imprint";
+import { absoluteUrl } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -21,12 +22,12 @@ export async function generateMetadata({
   return {
     title: dictionary.meta.imprint.title,
     description: dictionary.meta.imprint.description,
-    alternates: { canonical: `/${locale}/imprint` },
+    alternates: { canonical: absoluteUrl(`/${locale}/imprint`) },
     robots: { index: false, follow: true },
     openGraph: {
       title: dictionary.meta.imprint.title,
       description: dictionary.meta.imprint.description,
-      url: `/${locale}/imprint`,
+      url: absoluteUrl(`/${locale}/imprint`),
       type: "article",
     },
   };

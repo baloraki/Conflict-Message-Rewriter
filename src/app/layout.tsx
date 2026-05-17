@@ -3,8 +3,7 @@ import "./globals.css";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://burnafterchat.app";
+import { SITE_URL, absoluteUrl, localizedAlternates } from "@/lib/site";
 
 const TITLE =
   "Burn After Chat — Vent Anger, Frustration & Stress Privately | No AI, No Account";
@@ -133,9 +132,10 @@ export const metadata: Metadata = {
     "怒りを発散",
     "выпустить злость",
   ],
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
   alternates: {
-    canonical: "/",
+    canonical: absoluteUrl("/"),
+    languages: localizedAlternates(),
   },
   authors: [{ name: "Burn After Chat" }],
   creator: "Burn After Chat",
@@ -144,7 +144,7 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
     type: "website",
-    url: siteUrl,
+    url: absoluteUrl("/"),
     siteName: "Burn After Chat",
     locale: "en_US",
     alternateLocale: ["en_GB", "de_DE", "es_ES", "fr_FR", "it_IT", "pt_BR"],

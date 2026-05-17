@@ -1,6 +1,7 @@
 import { getDictionary } from "@/i18n/dictionaries";
 import { isLocale } from "@/i18n/config";
 import type { Locale } from "@/i18n/config";
+import { absoluteUrl } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -19,11 +20,11 @@ export async function generateMetadata({
   return {
     title: dictionary.meta.privacy.title,
     description: dictionary.meta.privacy.description,
-    alternates: { canonical: `/${locale}/privacy` },
+    alternates: { canonical: absoluteUrl(`/${locale}/privacy`) },
     openGraph: {
       title: dictionary.meta.privacy.title,
       description: dictionary.meta.privacy.description,
-      url: `/${locale}/privacy`,
+      url: absoluteUrl(`/${locale}/privacy`),
       type: "article",
     },
   };
