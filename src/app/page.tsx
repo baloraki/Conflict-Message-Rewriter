@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function RootPage() {
   return (
-    <main className="min-h-dvh-screen flex items-center justify-center px-4">
+    <main className="min-h-dvh flex items-center justify-center px-4">
       <nav aria-label="Language selector">
         <ul className="grid gap-3">
           {LOCALES.map((locale) => (
